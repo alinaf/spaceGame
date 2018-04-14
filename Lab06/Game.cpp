@@ -96,6 +96,7 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+	LoadSound("Assets/Music/LastParadise.wav");
     LoadSound("Assets/Player/Jump.wav");
     LoadSound("Assets/Coin/coin.wav");
     
@@ -311,7 +312,10 @@ void Game::GenerateOutput(){
 }
 
 void Game::RunLoop(){
-    while (quit){
+	// Play theme music 
+	Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
+    // Main game loop 
+	while (quit){
         ProcessInput();
         UpdateGame();
         GenerateOutput();
