@@ -112,7 +112,7 @@ void Game::LoadData(){
     }
     
     for (int i = 1; i < 11; i++){
-        std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
+        std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
     }
     
@@ -221,7 +221,7 @@ void Game::LoadNextLevel(){
                         mPlayer = p;
                         AnimatedSprite* as = new AnimatedSprite(p);
                         for (int i = 1; i < 11; i++){
-                            std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
+                            std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
                             as->AddImage(GetTexture(filename.c_str()));
                         }
                         p->SetSprite(as);
