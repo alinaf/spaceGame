@@ -1,10 +1,6 @@
 //
 //  BarrelMove.h
 //  Game-mac
-//
-//  Created by tml on 2/21/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
 
 #ifndef BarrelMove_h
 #define BarrelMove_h

@@ -2,9 +2,7 @@
 //  Item.h
 //  Game-mac
 //
-//  Created by tml on 4/5/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
+
 
 #ifndef Item_h
 #define Item_h
