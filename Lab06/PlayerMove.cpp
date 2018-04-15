@@ -3,11 +3,17 @@
 //  Game-mac
 //
 
-
 #include <stdio.h>
 #include "PlayerMove.h"
 #include "Actor.h"
 #include "Game.h"
+#include "SDL/SDL_mixer.h"
+#include <iostream>
+
+using namespace std;
+
+// Global variable to keep track of the number of times speedboss
+int var = 0;
 
 PlayerMove::PlayerMove(class Actor* owner):MoveComponent(owner){
     mSpacePressed = false;
@@ -42,10 +48,12 @@ void PlayerMove::ProcessInput(const Uint8* keyState){
 void PlayerMove::Update(float deltaTime){
     if (mSpeedMult == 2.0f){
         mSpeedBoostTimer += deltaTime;
-        if (mSpeedBoostTimer > 3.0f){
+        if (mSpeedBoostTimer > 4.0f){ 
+			var++;
             mSpeedMult = 1.0f;
             mSpeedBoostTimer = 0;
-        }
+			Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Sounds/PowerDown.wav"), 0);
+		}
     }
     if (mAccelerate){
         mXSpeed -= deltaTime * 300.0f;
@@ -94,10 +102,10 @@ void PlayerMove::Update(float deltaTime){
 //        mInAir = true;
 //    }
     
-    if (mOwner->GetPosition().y > 768.0f){
-        mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
-        mInAir = false;
+    if (mOwner->GetPosition().y > 768.0f) {
 		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
+		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
+        mInAir = false;
     }
     
     mOwner->GetGame()->SetCameraPos(Vector2(mOwner->GetPosition().x - 512, 0));
