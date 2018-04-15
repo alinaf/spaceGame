@@ -85,6 +85,7 @@ void Game::LoadData(){
     LoadTexture("Assets/Background/Fore_0.png");
     LoadTexture("Assets/Background/Fore_1.png");
     LoadTexture("Assets/Background/Fore_2.png");
+    LoadTexture("Assets/doge.png");
     
     for (int i = 1; i < 17; i++){
         std::string filename = "Assets/Coin/coin" + std::to_string(i) + ".png";
@@ -98,6 +99,7 @@ void Game::LoadData(){
     
     LoadSound("Assets/Player/Jump.wav");
     LoadSound("Assets/Coin/coin.wav");
+    LoadSound("Assets/LastParadise.wav");
     
     Actor* sky = new Actor(this);
     Actor* mid = new Actor(this);
@@ -218,10 +220,18 @@ void Game::LoadNextLevel(){
                     c->SetSprite(as);
                     c->SetPosition(Vector2(x, y-16));
                 }
+                else if (a=='S'){
+                    SpeedBoost* sb = new SpeedBoost(this);
+                    sb->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
+                    sb->SetPosition(Vector2(x,y - 16));
+                }
                 else{
                     Block* b = new Block(this);
                     b->SetTexture(a);
                     b->SetPosition(Vector2(x, y));
+                    if (y == 768 - 16){
+                        mBottomBlocks.push_back(b);
+                    }
                 }
             }
             x+=64;
@@ -254,6 +264,7 @@ bool Game::Initialize(){
         speed.y = 80;
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
         LoadData();
+        Mix_PlayChannel(1, GetSound("Assets/LastParadise.wav"), 0);
         prevTime = SDL_GetTicks();
         return true;
     }

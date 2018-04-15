@@ -14,13 +14,16 @@
 PlayerMove::PlayerMove(class Actor* owner):MoveComponent(owner){
     mSpacePressed = false;
     mInAir = false;
-    this->SetForwardSpeed(300.0f);
+//    this->SetForwardSpeed(300.0f);
 }
 
 void PlayerMove::ProcessInput(const Uint8* keyState){
-//    if (keyState[SDL_SCANCODE_LEFT]){
-//        this->SetForwardSpeed(-300.0f);
-//    }
+    if (keyState[SDL_SCANCODE_LEFT]){
+        mAccelerate = true;
+    }
+    else{
+        mAccelerate = false;
+    }
 //    else if (keyState[SDL_SCANCODE_RIGHT]){
 //        this->SetForwardSpeed(300.0f);
 //    }
@@ -39,9 +42,31 @@ void PlayerMove::ProcessInput(const Uint8* keyState){
 }
 
 void PlayerMove::Update(float deltaTime){
+    if (mSpeedMult == 2.0f){
+        mSpeedBoostTimer += deltaTime;
+        if (mSpeedBoostTimer > 3.0f){
+            mSpeedMult = 1.0f;
+            mSpeedBoostTimer = 0;
+        }
+    }
+    if (mAccelerate){
+        mXSpeed -= deltaTime * 100.0f;
+    }
+    else{
+        mXSpeed += deltaTime * 100.0f;
+    }
+    if (mXSpeed < 200.0f){
+        mXSpeed = 200.0f;
+    }
+    else if (mXSpeed > 400.0f){
+        mXSpeed = 400.0f;
+    }
+    this->SetForwardSpeed(mXSpeed * mSpeedMult);
     mOwner->SetPosition(Vector2(mOwner->GetPosition().x + deltaTime*this->GetForwardSpeed(), mOwner->GetPosition().y + deltaTime*mYSpeed));
+    int count = 0;
     for (Block* a : *(mOwner->GetGame()->GetBlocks())){
         if (a->GetCollision()->Intersect(mOwner->GetCollision())){
+            count++;
             float dx1, dx2, dy1, dy2;
             float min = 0;
             std::vector<Block*> b = *(mOwner->GetGame()->GetBlocks());
@@ -67,9 +92,12 @@ void PlayerMove::Update(float deltaTime){
             }
         }
     }
+//    if (count == 0){
+//        mInAir = true;
+//    }
     
     if (mOwner->GetPosition().y > 768.0f){
-        mOwner->SetPosition(Vector2(mOwner->GetPosition().x, 768.0f));
+        mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
         mInAir = false;
     }
     
@@ -82,5 +110,11 @@ void PlayerMove::Update(float deltaTime){
     if(mOwner->GetGame()->GetCameraPos().x >= 2560 * mOwner->GetGame()->numLevels){
         mOwner->GetGame()->LoadNextLevel();
     }
+//    if (mOwner->GetGame()->numLevels % 2 == 0){
+//        mult = 0.2f;
+//    }
+//    else{
+//        mult = 1;
+//    }
     mYSpeed += deltaTime*2000.0f;
 }

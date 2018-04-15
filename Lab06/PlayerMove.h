@@ -12,14 +12,27 @@
 
 class PlayerMove: public MoveComponent{
 public:
+    enum MoveState{
+        OnGround,
+        Jump,
+        Falling
+    };
+    enum CollSide{
+        None, Top, Bottom, Right, Left
+    };
     PlayerMove (class Actor* owner);
     void ProcessInput(const Uint8* keyState) override;
     void Update(float deltaTime) override;
+    void SetSpeedMult(float num) {mSpeedMult = num;}
 private:
     float mYSpeed = 0.0f;
     bool mSpacePressed;
     bool mInAir;
     float firstJump;
+    float mXSpeed = 400.0f;
+    bool mAccelerate = false;
+    float mSpeedMult = 1.0f;
+    float mSpeedBoostTimer = 0.0f;
 };
 
 #endif /* PlayerMove_h */

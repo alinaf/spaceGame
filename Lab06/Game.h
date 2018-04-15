@@ -15,6 +15,7 @@
 #include "Background.h"
 #include "Coin.h"
 #include "AnimatedSprite.h"
+#include "SpeedBoost.h"
 
 class Actor;
 
@@ -38,6 +39,7 @@ public:
     void SetCameraPos(const Vector2& cameraPos);
     void LoadNextLevel();
     int numLevels;
+    std::vector<Block*> & GetBottomBlocks() {return mBottomBlocks;}
     
 private:
     SDL_Window* window;
@@ -65,4 +67,5 @@ private:
     Vector2 playerStart;
     Vector2 mCameraPos;
     int levelIndex;
+    std::vector<Block*> mBottomBlocks;
 };

@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlayerMove.cpp"
-            timestampString = "544230399.147261"
+            filePath = "AnimatedSprite.cpp"
+            timestampString = "544061656.7371401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "PlayerMove::Update(float deltaTime)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "AnimatedSprite::Update(float deltaTime)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AnimatedSprite.cpp"
-            timestampString = "544061656.7371401"
+            filePath = "Game.cpp"
+            timestampString = "545443209.027317"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "AnimatedSprite::Update(float deltaTime)"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "Game::LoadNextLevel()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BarrelMove.cpp"
+            timestampString = "545443209.027854"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "BarrelMove::Update(float deltaTime)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
