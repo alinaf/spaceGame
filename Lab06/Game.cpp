@@ -9,7 +9,6 @@
 #include "SDL/SDL_image.h"
 #include <fstream>
 
-// TODO
 Game::Game(){
     quit = true;
     WALL_THICKNESS = 15;
@@ -52,8 +51,20 @@ SDL_Texture* Game::GetTexture(const char* filename){
 }
 
 void Game::LoadSound(const std::string& filename){
-    Mix_Chunk* sound=Mix_LoadWAV(filename.c_str());
+    Mix_Chunk* sound = Mix_LoadWAV(filename.c_str());
     sounds[filename] = sound;
+	if (filename == "Assets/Music/LastParadise.wav") {
+		Mix_VolumeChunk(sound, 50);
+	}
+	else if (filename == "Assets/Sounds/SpeedUp.wav") {
+		Mix_VolumeChunk(sound, 80);
+	} 
+	else if (filename == "Assets/Player/Falling.wav") {
+		Mix_VolumeChunk(sound, 80);
+	}
+	else {
+		Mix_VolumeChunk(sound, 25);
+	}
 }
 
 Mix_Chunk* Game::GetSound(const std::string& filename){

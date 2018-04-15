@@ -20,7 +20,7 @@ void SpeedBoost::UpdateActor(float deltaTime){
 		((PlayerMove*) GetGame()->GetPlayer()->GetMovement())->SetSpeedMult(2.0f);
         this->SetState(Actor::EDead);
 		Mix_PlayChannel(-1, GetGame()->GetSound("Assets/Sounds/SpeedUp.wav"), 0);
-    }
+	}
     if (this->GetPosition().x - this->GetGame()->GetCameraPos().x < -this->GetCollision()->GetWidth()/2){
         this->SetState(Actor::EDead);
 	}

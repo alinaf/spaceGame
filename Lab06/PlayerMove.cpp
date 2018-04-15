@@ -49,8 +49,6 @@ void PlayerMove::Update(float deltaTime){
     }
     if (mAccelerate){
         mXSpeed -= deltaTime * 300.0f;
-		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Sounds/SpeedUp.wav"), 0);
-
     }
     else{
         mXSpeed += deltaTime * 300.0f;
