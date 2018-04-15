@@ -49,6 +49,8 @@ void PlayerMove::Update(float deltaTime){
     }
     if (mAccelerate){
         mXSpeed -= deltaTime * 300.0f;
+		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Sounds/SpeedUp.wav"), 0);
+
     }
     else{
         mXSpeed += deltaTime * 300.0f;
@@ -97,6 +99,7 @@ void PlayerMove::Update(float deltaTime){
     if (mOwner->GetPosition().y > 768.0f){
         mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
         mInAir = false;
+		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
     }
     
     mOwner->GetGame()->SetCameraPos(Vector2(mOwner->GetPosition().x - 512, 0));

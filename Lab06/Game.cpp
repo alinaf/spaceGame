@@ -95,11 +95,13 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
-	LoadSound("Assets/Music/LastParadise.wav");
+	LoadSound("Assets/Player/Falling.wav");
+	LoadSound("Assets/Player/Scream.wav");
     LoadSound("Assets/Player/Jump.wav");
     LoadSound("Assets/Coin/coin.wav");
-    LoadSound("Assets/LastParadise.wav");
-    
+	LoadSound("Assets/Sounds/SpeedUp.wav");
+	LoadSound("Assets/Music/LastParadise.wav");
+
     Actor* sky = new Actor(this);
     Actor* mid = new Actor(this);
     Actor* fore = new Actor(this);
@@ -263,7 +265,7 @@ bool Game::Initialize(){
         speed.y = 80;
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
         LoadData();
-        Mix_PlayChannel(1, GetSound("Assets/LastParadise.wav"), 0);
+		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
         prevTime = SDL_GetTicks();
         return true;
     }
@@ -321,9 +323,6 @@ void Game::GenerateOutput(){
 }
 
 void Game::RunLoop(){
-	// Play theme music 
-	Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
-    // Main game loop 
 	while (quit){
         ProcessInput();
         UpdateGame();
