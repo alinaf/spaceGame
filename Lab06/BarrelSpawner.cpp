@@ -22,4 +22,7 @@ void BarrelSpawner::UpdateActor(float deltaTime){
         }
         
     }
+    if (mPosition.x - GetGame()->GetCameraPos().x < 0){
+        this->SetState(Actor::EDead);
+    }
 }

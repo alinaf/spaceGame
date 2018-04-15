@@ -13,7 +13,6 @@ Game::Game(){
     quit = true;
     WALL_THICKNESS = 15;
     PADDLE_HEIGHT = 100;
-    blocks = new std::vector<Block*>;
     mPlayer = nullptr;
     levelIndex = 0;
     numLevels = 0;
@@ -253,9 +252,6 @@ void Game::LoadNextLevel(){
                     Block* b = new Block(this);
                     b->SetTexture(a);
                     b->SetPosition(Vector2(x, y));
-                    if (y == 768 - 16){
-                        mBottomBlocks.push_back(b);
-                    }
                 }
             }
             x+=64;
