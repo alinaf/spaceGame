@@ -50,10 +50,10 @@ void PlayerMove::Update(float deltaTime){
         }
     }
     if (mAccelerate){
-        mXSpeed -= deltaTime * 100.0f;
+        mXSpeed -= deltaTime * 300.0f;
     }
     else{
-        mXSpeed += deltaTime * 100.0f;
+        mXSpeed += deltaTime * 300.0f;
     }
     if (mXSpeed < 200.0f){
         mXSpeed = 200.0f;
