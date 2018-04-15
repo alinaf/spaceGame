@@ -1,4 +1,4 @@
-//
+ //
 //  PlayerMove.cpp
 //  Game-mac
 //
@@ -64,12 +64,12 @@ void PlayerMove::Update(float deltaTime){
     this->SetForwardSpeed(mXSpeed * mSpeedMult);
     mOwner->SetPosition(Vector2(mOwner->GetPosition().x + deltaTime*this->GetForwardSpeed(), mOwner->GetPosition().y + deltaTime*mYSpeed));
     int count = 0;
-    for (Block* a : *(mOwner->GetGame()->GetBlocks())){
+    for (Block* a : mOwner->GetGame()->GetBlocks()){
         if (a->GetCollision()->Intersect(mOwner->GetCollision())){
             count++;
             float dx1, dx2, dy1, dy2;
             float min = 0;
-            std::vector<Block*> b = *(mOwner->GetGame()->GetBlocks());
+            std::vector<Block*> b = mOwner->GetGame()->GetBlocks();
             dy2 = abs(a->GetCollision()->GetMax().y - mOwner->GetCollision()->GetMin().y);
             dy1 = abs(a->GetCollision()->GetMin().y - mOwner->GetCollision()->GetMax().y);
             dx1 = abs(a->GetCollision()->GetMin().x - mOwner->GetCollision()->GetMax().x);
@@ -107,7 +107,7 @@ void PlayerMove::Update(float deltaTime){
             mYSpeed -= deltaTime*1500.0f;
         }
     }
-    if(mOwner->GetGame()->GetCameraPos().x >= 2560 * mOwner->GetGame()->numLevels){
+    if(mOwner->GetGame()->GetCameraPos().x >= 54 * 64 * mOwner->GetGame()->numLevels - 1024 + 128 * mOwner->GetGame()->numLevels){
         mOwner->GetGame()->LoadNextLevel();
     }
 //    if (mOwner->GetGame()->numLevels % 2 == 0){

@@ -14,11 +14,11 @@ Block::Block(class Game* game):Actor(game){
     mSprite = new SpriteComponent(this);
     mCollision = new CollisionComponent(this);
     mCollision->SetSize(64, 32);
-    this->GetGame()->GetBlocks()->push_back(this);
+    this->GetGame()->GetBlocks().push_back(this);
 }
 
 Block::~Block(){
-    this->GetGame()->GetBlocks()->erase(std::find(this->GetGame()->GetBlocks()->begin(), this->GetGame()->GetBlocks()->end(), this));
+    this->GetGame()->GetBlocks().erase(std::find(this->GetGame()->GetBlocks().begin(), this->GetGame()->GetBlocks().end(), this));
 }
 
 void Block::SetTexture(char letter){

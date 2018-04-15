@@ -31,7 +31,7 @@ public:
     void AddSprite(SpriteComponent* sc);
     void RemoveSprite(SpriteComponent* sc);
     SDL_Texture* GetTexture(const char* filename);
-    std::vector<Block*>* GetBlocks() const{return blocks;}
+    std::vector<Block*> & GetBlocks() {return blocks;}
     Player* GetPlayer() const{return mPlayer;}
     Mix_Chunk* GetSound(const std::string& filename);
     Vector2 GetPlayerStart() const{return playerStart;}
@@ -39,7 +39,6 @@ public:
     void SetCameraPos(const Vector2& cameraPos);
     void LoadNextLevel();
     int numLevels;
-    std::vector<Block*> & GetBottomBlocks() {return mBottomBlocks;}
     
 private:
     SDL_Window* window;
@@ -60,12 +59,11 @@ private:
     void UnloadData();
     void LoadTexture(const char* filename);
     std::vector<SpriteComponent*> mSprites;
-    std::vector<Block*>* blocks;
+    std::vector<Block*> blocks;
     Player* mPlayer;
     void LoadSound(const std::string& filename);
     std::unordered_map<std::string, Mix_Chunk*> sounds;
     Vector2 playerStart;
     Vector2 mCameraPos;
     int levelIndex;
-    std::vector<Block*> mBottomBlocks;
 };
