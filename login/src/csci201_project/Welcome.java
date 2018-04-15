@@ -181,6 +181,10 @@ class loginPanel extends JPanel {
 		Label gamenamel = new Label(100, 80, 200, 25, "Gamename: ", label_f, this);
 		add(gamenamel);
 		
+		Label errormsgl = new Label(100, 130, 500, 25, "", label_f, this);
+		errormsgl.setForeground(Color.RED);
+		add(errormsgl);
+		
 		JTextField userText = new JTextField();
 		userText.setBounds(300,20,200,25);
 		userText.setFont(text_f);
@@ -206,11 +210,16 @@ class loginPanel extends JPanel {
                 	boolean isExisted = checkNameExist(gamenameText.getText());
                 	System.out.println(isExisted);
                 	if (isExisted) {
-                		JOptionPane.showMessageDialog(null, "This name has existed!", "Create Game Error", JOptionPane.ERROR_MESSAGE);
+                		errormsgl.setText("Create Game Error: This name has existed!");
                 	}
                 	else {
-                		sendMessageToServer("createRoom " + gamenameText.getText() + " " + myUserID);
+                		errormsgl.setText("Now waiting for another player...");
+                		repaint();
+                		invalidate();
+                		validate();
                     	System.out.println("Now waiting for another thread...");
+                		sendMessageToServer("createRoom " + gamenameText.getText() + " " + myUserID);
+                		
                     	status = receiveMessageFromServer();
                     	System.out.println("Starting...");
                     	launchGame("");
@@ -227,6 +236,7 @@ class loginPanel extends JPanel {
                 if (myUserID > 0) {
                 	boolean checkOK = checkNameExist(gamenameText.getText());
                 	if (checkOK) {
+                		errormsgl.setText("");
                 		sendMessageToServer("joinRoom " + gamenameText.getText() + " " + myUserID);
                     	System.out.println("be about to start");
                     	status = receiveMessageFromServer();
@@ -234,7 +244,7 @@ class loginPanel extends JPanel {
                     	launchGame("");
                 	}
                 	else {
-                		JOptionPane.showMessageDialog(null, "Game name doesn't exist!", "Join Game Error", JOptionPane.ERROR_MESSAGE);
+                		errormsgl.setText("Join Game Error: Game name doesn't exist!");
                 	}
                 }
             }  
