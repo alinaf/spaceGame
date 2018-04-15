@@ -2,9 +2,7 @@
 //  PlayerMove.cpp
 //  Game-mac
 //
-//  Created by tml on 2/8/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
+
 
 #include <stdio.h>
 #include "PlayerMove.h"
@@ -50,10 +48,10 @@ void PlayerMove::Update(float deltaTime){
         }
     }
     if (mAccelerate){
-        mXSpeed -= deltaTime * 100.0f;
+        mXSpeed -= deltaTime * 300.0f;
     }
     else{
-        mXSpeed += deltaTime * 100.0f;
+        mXSpeed += deltaTime * 300.0f;
     }
     if (mXSpeed < 200.0f){
         mXSpeed = 200.0f;
@@ -99,6 +97,7 @@ void PlayerMove::Update(float deltaTime){
     if (mOwner->GetPosition().y > 768.0f){
         mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
         mInAir = false;
+		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
     }
     
     mOwner->GetGame()->SetCameraPos(Vector2(mOwner->GetPosition().x - 512, 0));

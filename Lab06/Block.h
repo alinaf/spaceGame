@@ -2,9 +2,6 @@
 //  Block.h
 //  Game-mac
 //
-//  Created by tml on 2/1/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
 
 #ifndef Block_h
 #define Block_h

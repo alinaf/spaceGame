@@ -1,10 +1,6 @@
 //
 //  Background.cpp
 //  Game-mac
-//
-//  Created by tml on 2/22/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
 
 #include <stdio.h>
 #include "Background.h"

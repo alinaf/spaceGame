@@ -1,10 +1,7 @@
 //
 //  AnimatedSprite.h
 //  Game-mac
-//
-//  Created by tml on 2/25/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
+
 
 #ifndef AnimatedSprite_h
 #define AnimatedSprite_h

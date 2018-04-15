@@ -2,9 +2,7 @@
 //  SpeedBoost.cpp
 //  Game-mac
 //
-//  Created by tml on 4/14/18.
-//  Copyright © 2018 Sanjay Madhav. All rights reserved.
-//
+
 
 #include <stdio.h>
 #include "Game.h"
@@ -19,10 +17,11 @@ SpeedBoost::SpeedBoost(class Game* game):Actor(game){
 
 void SpeedBoost::UpdateActor(float deltaTime){
     if (this->GetCollision()->Intersect(this->GetGame()->GetPlayer()->GetCollision())){
-        ((PlayerMove*) GetGame()->GetPlayer()->GetMovement())->SetSpeedMult(2.0f);
+		((PlayerMove*) GetGame()->GetPlayer()->GetMovement())->SetSpeedMult(2.0f);
         this->SetState(Actor::EDead);
-    }
+		Mix_PlayChannel(-1, GetGame()->GetSound("Assets/Sounds/SpeedUp.wav"), 0);
+	}
     if (this->GetPosition().x - this->GetGame()->GetCameraPos().x < -this->GetCollision()->GetWidth()/2){
         this->SetState(Actor::EDead);
-    }
+	}
 }

@@ -2,16 +2,13 @@
 //  Game.cpp
 //  Game-mac
 //
-//  Created by Sanjay Madhav on 5/31/17.
-//  Copyright © 2017 Sanjay Madhav. All rights reserved.
-//
+
 
 #include "Game.h"
 #include "Actor.h"
 #include "SDL/SDL_image.h"
 #include <fstream>
 
-// TODO
 Game::Game(){
     quit = true;
     WALL_THICKNESS = 15;
@@ -53,8 +50,20 @@ SDL_Texture* Game::GetTexture(const char* filename){
 }
 
 void Game::LoadSound(const std::string& filename){
-    Mix_Chunk* sound=Mix_LoadWAV(filename.c_str());
+    Mix_Chunk* sound = Mix_LoadWAV(filename.c_str());
     sounds[filename] = sound;
+	if (filename == "Assets/Music/LastParadise.wav") {
+		Mix_VolumeChunk(sound, 50);
+	}
+	else if (filename == "Assets/Sounds/SpeedUp.wav") {
+		Mix_VolumeChunk(sound, 80);
+	} 
+	else if (filename == "Assets/Player/Falling.wav") {
+		Mix_VolumeChunk(sound, 80);
+	}
+	else {
+		Mix_VolumeChunk(sound, 25);
+	}
 }
 
 Mix_Chunk* Game::GetSound(const std::string& filename){
@@ -92,15 +101,17 @@ void Game::LoadData(){
     }
     
     for (int i = 1; i < 11; i++){
-        std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
+        std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
     }
     
-	LoadSound("Assets/Music/LastParadise.wav");
+	LoadSound("Assets/Player/Falling.wav");
+	LoadSound("Assets/Player/Scream.wav");
     LoadSound("Assets/Player/Jump.wav");
     LoadSound("Assets/Coin/coin.wav");
-    LoadSound("Assets/LastParadise.wav");
-    
+	LoadSound("Assets/Sounds/SpeedUp.wav");
+	LoadSound("Assets/Music/LastParadise.wav");
+
     Actor* sky = new Actor(this);
     Actor* mid = new Actor(this);
     Actor* fore = new Actor(this);
@@ -198,7 +209,7 @@ void Game::LoadNextLevel(){
                         mPlayer = p;
                         AnimatedSprite* as = new AnimatedSprite(p);
                         for (int i = 1; i < 11; i++){
-                            std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
+                            std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
                             as->AddImage(GetTexture(filename.c_str()));
                         }
                         p->SetSprite(as);
@@ -261,7 +272,7 @@ bool Game::Initialize(){
         speed.y = 80;
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
         LoadData();
-        Mix_PlayChannel(1, GetSound("Assets/LastParadise.wav"), 0);
+		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
         prevTime = SDL_GetTicks();
         return true;
     }
@@ -319,9 +330,6 @@ void Game::GenerateOutput(){
 }
 
 void Game::RunLoop(){
-	// Play theme music 
-	Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
-    // Main game loop 
 	while (quit){
         ProcessInput();
         UpdateGame();
