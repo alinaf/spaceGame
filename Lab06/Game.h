@@ -16,6 +16,7 @@
 #include "Coin.h"
 #include "AnimatedSprite.h"
 #include "SpeedBoost.h"
+#include "Invulnerability.h"
 
 class Actor;
 

@@ -25,7 +25,9 @@ void BarrelMove::Update(float deltaTime){
         }
     }
     if (mOwner->GetCollision()->Intersect(mOwner->GetGame()->GetPlayer()->GetCollision())){
-        mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
+        if (!mOwner->GetGame()->GetPlayer()->GetInvulnerable()){
+            mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
+        }
     }
     if (mOwner->GetPosition().y > 768.0f){
         mOwner->SetState(Actor::EDead);

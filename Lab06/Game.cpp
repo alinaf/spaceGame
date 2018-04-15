@@ -105,6 +105,11 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+    for (int i = 1; i < 11; i++){
+        std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
 	LoadSound("Assets/Player/Falling.wav");
 	LoadSound("Assets/Player/Scream.wav");
     LoadSound("Assets/Player/Jump.wav");
@@ -144,51 +149,6 @@ void Game::LoadData(){
     fore->SetPosition(Vector2(0.0f, 384.0f));
     
     LoadNextLevel();
-    
-//    std::ifstream ifile("Assets/level0.txt");
-//    int x = 32;
-//    int y = 16;
-//    std::string curr;
-//    while (ifile>>curr){
-//        for (char a : curr){
-//            if (a!='.'){
-//                if (a=='P'){
-//                    Player* p = new Player(this);
-//                    mPlayer = p;
-//                    AnimatedSprite* as = new AnimatedSprite(p);
-//                    for (int i = 1; i < 11; i++){
-//                        std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
-//                        as->AddImage(GetTexture(filename.c_str()));
-//                    }
-//                    p->SetSprite(as);
-//                    p->SetPosition(Vector2(x, y));
-//                    playerStart = Vector2(x, y);
-//                }
-//                else if (a=='O'){
-//                    BarrelSpawner* b = new BarrelSpawner(this);
-//                    b->SetPosition(Vector2(x, y));
-//                }
-//                else if (a=='*'){
-//                    Coin* c = new Coin(this);
-//                    AnimatedSprite* as = new AnimatedSprite(c);
-//                    for (int i = 1; i < 17; i++){
-//                        std::string filename = "Assets/Coin/coin" + std::to_string(i) + ".png";
-//                        as->AddImage(GetTexture(filename.c_str()));
-//                    }
-//                    c->SetSprite(as);
-//                    c->SetPosition(Vector2(x, y-16));
-//                }
-//                else{
-//                    Block* b = new Block(this);
-//                    b->SetTexture(a);
-//                    b->SetPosition(Vector2(x, y));
-//                }
-//            }
-//            x+=64;
-//        }
-//        x=32;
-//        y+=32;
-//    }
 }
 
 void Game::LoadNextLevel(){
@@ -209,7 +169,7 @@ void Game::LoadNextLevel(){
                         mPlayer = p;
                         AnimatedSprite* as = new AnimatedSprite(p);
                         for (int i = 1; i < 11; i++){
-                            std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
+                            std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
                             as->AddImage(GetTexture(filename.c_str()));
                         }
                         p->SetSprite(as);
@@ -235,6 +195,11 @@ void Game::LoadNextLevel(){
                     SpeedBoost* sb = new SpeedBoost(this);
                     sb->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
                     sb->SetPosition(Vector2(x,y - 16));
+                }
+                else if (a == 'I'){
+                    Invulnerability* in = new Invulnerability(this);
+                    in->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
+                    in->SetPosition(Vector2(x,y - 16));
                 }
                 else{
                     Block* b = new Block(this);
