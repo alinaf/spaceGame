@@ -107,7 +107,7 @@ void Game::LoadData(){
     LoadTexture("Assets/doge.png");
     
     for (int i = 1; i < 17; i++){
-        std::string filename = "Assets/Coin/coin" + std::to_string(i) + ".png";
+        std::string filename = "Assets/Coin/crystal" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
     }
     
@@ -121,7 +121,10 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
@@ -197,8 +200,8 @@ void Game::LoadNextLevel(){
                 else if (a=='*'){
                     Coin* c = new Coin(this);
                     AnimatedSprite* as = new AnimatedSprite(c);
-                    for (int i = 1; i < 17; i++){
-                        std::string filename = "Assets/Coin/coin" + std::to_string(i) + ".png";
+                    for (int i = 1; i < 9; i++){
+                        std::string filename = "Assets/Coin/crystal" + std::to_string(i) + ".png";
                         as->AddImage(GetTexture(filename.c_str()));
                     }
                     c->SetSprite(as);
