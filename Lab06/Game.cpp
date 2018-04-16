@@ -75,6 +75,9 @@ void Game::LoadSound(const std::string& filename){
 	else if (filename == "Assets/Crystal/Crystal.wav") {
 		Mix_VolumeChunk(sound, 30);
 	}
+    else if (filename == "Assets/Sounds/Gravity.wav") {
+        Mix_VolumeChunk(sound, 10);
+    }
 }
 
 Mix_Chunk* Game::GetSound(const std::string& filename){
@@ -124,10 +127,12 @@ void Game::LoadData(){
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
+    LoadSound("Assets/Sounds/Gravity.wav");
 	LoadSound("Assets/Player/Falling.wav");
 	LoadSound("Assets/Player/Scream.wav");
 	LoadSound("Assets/Player/Jump.wav");
 	LoadSound("Assets/Crystal/Crystal.wav");
+
 
 	Actor* sky = new Actor(this);
     Actor* mid = new Actor(this);
