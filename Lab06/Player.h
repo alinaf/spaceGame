@@ -9,6 +9,7 @@
 #include "Actor.h"
 #include "PlayerMove.h"
 #include "AnimatedSprite.h"
+#include <string>
 
 class Player: public Actor {
 public:
@@ -19,8 +20,9 @@ public:
 private:
     bool mInvulnerable = false;
     float invulnerableTimer = 0.0f;
-    AnimatedSprite* rainbow;
-    AnimatedSprite* run;
+    std::string currSprite = "run";
+//    AnimatedSprite* rainbow;
+//    AnimatedSprite* run;
 };
 
 #endif /* Player_h */

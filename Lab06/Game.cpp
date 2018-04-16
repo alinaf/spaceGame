@@ -116,17 +116,15 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
-<<<<<<< HEAD
     for (int i = 1; i < 11; i++){
-        std::string filename = "Assets/Player/Run" + std::to_string(i) + ".png";
+        std::string filename = "Assets/Player/Rainbow" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
     }
     
-=======
+    
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
->>>>>>> 8dd62f0cbe347a6f99a7146840c6a0cb9646f3e3
 	LoadSound("Assets/Player/Falling.wav");
 	LoadSound("Assets/Player/Scream.wav");
 	LoadSound("Assets/Player/Jump.wav");
