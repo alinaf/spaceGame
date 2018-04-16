@@ -26,6 +26,7 @@
 		E354ABA8203FC412006FDABF /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E354AB9F203FC412006FDABF /* Block.cpp */; };
 		E3901AD02043CFD90016C11A /* Coin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3901ACF2043CFD90016C11A /* Coin.cpp */; };
 		E3901AD22043D42D0016C11A /* AnimatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3901AD12043D42D0016C11A /* AnimatedSprite.cpp */; };
+		E39B10ED20840F0B00C7FA19 /* Invulnerability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E39B10EC20840F0B00C7FA19 /* Invulnerability.cpp */; };
 		E3BABBF12082C789007D546C /* SpeedBoost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3BABBF02082C789007D546C /* SpeedBoost.cpp */; };
 		E3E5DCC02076981D00B248B2 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3E5DCBF2076981D00B248B2 /* Item.cpp */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,8 @@
 		E3901ACF2043CFD90016C11A /* Coin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Coin.cpp; sourceTree = "<group>"; };
 		E3901AD12043D42D0016C11A /* AnimatedSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnimatedSprite.cpp; sourceTree = "<group>"; };
 		E3901AD32043D4340016C11A /* AnimatedSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatedSprite.h; sourceTree = "<group>"; };
+		E39B10EC20840F0B00C7FA19 /* Invulnerability.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Invulnerability.cpp; sourceTree = "<group>"; };
+		E39B10EE20840F1100C7FA19 /* Invulnerability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Invulnerability.h; sourceTree = "<group>"; };
 		E3BABBF02082C789007D546C /* SpeedBoost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpeedBoost.cpp; sourceTree = "<group>"; };
 		E3BABBF22082C795007D546C /* SpeedBoost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeedBoost.h; sourceTree = "<group>"; };
 		E3E5DCBE2076981000B248B2 /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				E3E5DCBE2076981000B248B2 /* Item.h */,
 				E3BABBF02082C789007D546C /* SpeedBoost.cpp */,
 				E3BABBF22082C795007D546C /* SpeedBoost.h */,
+				E39B10EC20840F0B00C7FA19 /* Invulnerability.cpp */,
+				E39B10EE20840F1100C7FA19 /* Invulnerability.h */,
 				92924F981EDF6AC900A740A7 /* Main.cpp */,
 				927612C11F466FA50069B824 /* Math.cpp */,
 				927612C21F466FA50069B824 /* Math.h */,
@@ -225,6 +230,7 @@
 				927612C31F466FA50069B824 /* Actor.cpp in Sources */,
 				927612C41F466FA50069B824 /* Component.cpp in Sources */,
 				92924F991EDF6AC900A740A7 /* Main.cpp in Sources */,
+				E39B10ED20840F0B00C7FA19 /* Invulnerability.cpp in Sources */,
 				92924F9C1EDF6DC800A740A7 /* Game.cpp in Sources */,
 				E354ABA4203FC412006FDABF /* MoveComponent.cpp in Sources */,
 				E347642D203FC8A500A14B6D /* Background.cpp in Sources */,
