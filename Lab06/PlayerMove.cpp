@@ -111,7 +111,7 @@ void PlayerMove::Update(float deltaTime){
     
     if (mOwner->GetPosition().y > 768.0f) {
 		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
-		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 768.0f-32-32));
+		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 0.0f));
         mInAir = false;
     }
     
