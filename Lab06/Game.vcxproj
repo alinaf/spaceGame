@@ -12,22 +12,54 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Barrel.h" />
+    <ClInclude Include="BarrelMove.h" />
+    <ClInclude Include="BarrelSpawner.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Coin.h" />
+    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Invulnerability.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="MoonBounce.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerMove.h" />
+    <ClInclude Include="SpeedBoost.h" />
+    <ClInclude Include="SpriteComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Barrel.cpp" />
+    <ClCompile Include="BarrelMove.cpp" />
+    <ClCompile Include="BarrelSpawner.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Invulnerability.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MoonBounce.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerMove.cpp" />
+    <ClCompile Include="SpeedBoost.cpp" />
+    <ClCompile Include="SpriteComponent.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BC508D87-495F-4554-932D-DD68388B63CC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -67,15 +99,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\Libraries\SDL\include;..\Libraries\GLEW\include;..\Libraries\rapidjson\include;..\Libraries\SOIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Libraries\MySQL\include;..\Libraries\SDL\include;..\Libraries\GLEW\include;..\Libraries\rapidjson\include;..\Libraries\SOIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Libraries\SDL\lib\win\x86;..\Libraries\GLEW\lib\win\x86;..\Libraries\SOIL\lib\win\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Libraries\MySQL\lib;..\Libraries\SDL\lib\win\x86;..\Libraries\GLEW\lib\win\x86;..\Libraries\SOIL\lib\win\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libmysql.lib;opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/NODEFAULTLIB:msvcrt.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
