@@ -14,7 +14,7 @@ BarrelSpawner::BarrelSpawner(Game* game): Actor(game){
 void BarrelSpawner::UpdateActor(float deltaTime){
     timer-=deltaTime;
     if (timer <= 0){
-        if (rand() % 1000 == 0){
+        if (rand() % 800 == 0){
             Barrel* b = new Barrel(this->GetGame());
             b->GetSprite()->SetTexture(this->GetGame()->GetTexture("Assets/Barrel.png"));
             b->SetPosition(Vector2(this->GetPosition().x, this->GetPosition().y));

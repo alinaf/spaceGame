@@ -11,12 +11,12 @@
 #include <ranlib.h>
 
 BarrelMove::BarrelMove(class Actor* owner):MoveComponent(owner){
-    SetForwardSpeed(-200.0f - (rand()%10) * 50.0f);
+    SetForwardSpeed(-100.0f - (rand()%10) * 25.0f);
     SetAngularSpeed(-2*Math::Pi);
 }
 
 void BarrelMove::Update(float deltaTime){
-    mOwner->SetPosition(Vector2(mOwner->GetPosition().x + deltaTime * GetForwardSpeed(), mOwner->GetPosition().y + deltaTime*500.0f));
+    mOwner->SetPosition(Vector2(mOwner->GetPosition().x + deltaTime * GetForwardSpeed(), mOwner->GetPosition().y + deltaTime*300.0f));
     mOwner->SetRotation(mOwner->GetRotation() + GetAngularSpeed()*deltaTime);
     for (Block* a : mOwner->GetGame()->GetBlocks()){
         if (a->GetCollision()->Intersect(mOwner->GetCollision())){
@@ -25,20 +25,10 @@ void BarrelMove::Update(float deltaTime){
         }
     }
     if (mOwner->GetCollision()->Intersect(mOwner->GetGame()->GetPlayer()->GetCollision())){
-<<<<<<< HEAD
-=======
-
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
         if (!mOwner->GetGame()->GetPlayer()->GetInvulnerable()){
             Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
             mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
         }
-<<<<<<< HEAD
-=======
-
-        Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
-		mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
     }
     if (mOwner->GetPosition().y > 768.0f){
         mOwner->SetState(Actor::EDead);

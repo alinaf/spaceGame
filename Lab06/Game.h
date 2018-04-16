@@ -17,6 +17,7 @@
 #include "AnimatedSprite.h"
 #include "SpeedBoost.h"
 #include "Invulnerability.h"
+#include "MoonBounce.h"
 
 class Actor;
 

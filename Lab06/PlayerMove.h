@@ -22,6 +22,7 @@ public:
     void ProcessInput(const Uint8* keyState) override;
     void Update(float deltaTime) override;
     void SetSpeedMult(float num) {mSpeedMult = num;}
+    void SetGravity(float g) {mGravity = g;}
 private:
     float mYSpeed = 0.0f;
     bool mSpacePressed;
@@ -31,6 +32,8 @@ private:
     bool mAccelerate = false;
     float mSpeedMult = 1.0f;
     float mSpeedBoostTimer = 0.0f;
+    float mGravity = 2000.0f;
+    float mMoonBounceTimer = 0.0f;
 };
 
 #endif /* PlayerMove_h */

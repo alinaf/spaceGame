@@ -121,10 +121,6 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
@@ -214,6 +210,11 @@ void Game::LoadNextLevel(){
                 }
                 else if (a == 'I'){
                     Invulnerability* in = new Invulnerability(this);
+                    in->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
+                    in->SetPosition(Vector2(x,y - 16));
+                }
+                else if (a == 'G'){
+                    MoonBounce* in = new MoonBounce(this);
                     in->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
                     in->SetPosition(Vector2(x,y - 16));
                 }

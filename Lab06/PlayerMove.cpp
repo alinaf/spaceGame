@@ -55,6 +55,13 @@ void PlayerMove::Update(float deltaTime){
 			Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Sounds/PowerDown.wav"), 0);
 		}
     }
+    if (mGravity == 1000.0f){
+        mMoonBounceTimer += deltaTime;
+        if (mMoonBounceTimer > 5.0f){
+            mGravity = 2000.0f;
+            mMoonBounceTimer = 0.0f;
+        }
+    }
     if (mAccelerate){
         mXSpeed -= deltaTime * 300.0f;
     }
@@ -123,5 +130,5 @@ void PlayerMove::Update(float deltaTime){
 //    else{
 //        mult = 1;
 //    }
-    mYSpeed += deltaTime*2000.0f;
+    mYSpeed += deltaTime*mGravity;
 }
