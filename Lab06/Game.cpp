@@ -73,7 +73,7 @@ void Game::LoadSound(const std::string& filename){
 		Mix_VolumeChunk(sound, 10);
 	}
 	else if (filename == "Assets/Crystal/Crystal.wav") {
-		Mix_VolumeChunk(sound, 128);
+		Mix_VolumeChunk(sound, 30);
 	}
 }
 
