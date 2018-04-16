@@ -124,6 +124,26 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+    for (int i = 1; i < 7; i++){
+        std::string filename = "Assets/Red/frame " + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
+    for (int i = 1; i < 7; i++){
+        std::string filename = "Assets/Yellow/frame " + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
+    for (int i = 1; i < 7; i++){
+        std::string filename = "Assets/Green/frame " + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
+    for (int i = 1; i < 7; i++){
+        std::string filename = "Assets/Blue/frame " + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
@@ -209,18 +229,33 @@ void Game::LoadNextLevel(){
                     c->SetPosition(Vector2(x, y-16));
                 }
                 else if (a=='S'){
-                    SpeedBoost* sb = new SpeedBoost(this);
-                    sb->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
-                    sb->SetPosition(Vector2(x,y - 16));
+                    SpeedBoost* in = new SpeedBoost(this);
+                    AnimatedSprite* as = new AnimatedSprite(in);
+                    for (int i = 1; i < 7; i++){
+                        std::string filename = "Assets/Red/frame " + std::to_string(i) + ".png";
+                        as->AddImage(GetTexture(filename.c_str()));
+                    }
+                    in->SetSprite(as);
+                    in->SetPosition(Vector2(x,y - 16));
                 }
                 else if (a == 'I'){
                     Invulnerability* in = new Invulnerability(this);
-                    in->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
+                    AnimatedSprite* as = new AnimatedSprite(in);
+                    for (int i = 1; i < 7; i++){
+                        std::string filename = "Assets/Blue/frame " + std::to_string(i) + ".png";
+                        as->AddImage(GetTexture(filename.c_str()));
+                    }
+                    in->SetSprite(as);
                     in->SetPosition(Vector2(x,y - 16));
                 }
                 else if (a == 'G'){
                     MoonBounce* in = new MoonBounce(this);
-                    in->GetSprite()->SetTexture(GetTexture("Assets/doge.png"));
+                    AnimatedSprite* as = new AnimatedSprite(in);
+                    for (int i = 1; i < 7; i++){
+                        std::string filename = "Assets/Green/frame " + std::to_string(i) + ".png";
+                        as->AddImage(GetTexture(filename.c_str()));
+                    }
+                    in->SetSprite(as);
                     in->SetPosition(Vector2(x,y - 16));
                 }
                 else{
