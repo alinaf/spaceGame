@@ -121,10 +121,7 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
+
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");

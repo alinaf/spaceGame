@@ -25,20 +25,12 @@ void BarrelMove::Update(float deltaTime){
         }
     }
     if (mOwner->GetCollision()->Intersect(mOwner->GetGame()->GetPlayer()->GetCollision())){
-<<<<<<< HEAD
-=======
 
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
         if (!mOwner->GetGame()->GetPlayer()->GetInvulnerable()){
             Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
             mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
         }
-<<<<<<< HEAD
-=======
 
-        Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
-		mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 768-32-32));
->>>>>>> a2c096aee0dfc3a8b9207990fa397887265c5ff0
     }
     if (mOwner->GetPosition().y > 768.0f){
         mOwner->SetState(Actor::EDead);
