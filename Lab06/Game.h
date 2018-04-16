@@ -2,6 +2,7 @@
 
 // TODO
 #include "SDL/SDL.h"
+#include "SDL/SDL_ttf.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -41,6 +42,7 @@ public:
     void SetCameraPos(const Vector2& cameraPos);
     void LoadNextLevel();
     int numLevels;
+    void AddScore(int num) {score += num;}
     
 private:
     SDL_Window* window;
@@ -68,4 +70,5 @@ private:
     Vector2 playerStart;
     Vector2 mCameraPos;
     int levelIndex;
+    int score = 0;
 };

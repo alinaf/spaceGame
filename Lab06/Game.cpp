@@ -7,7 +7,6 @@
 #include "Game.h"
 #include "Actor.h"
 #include "SDL/SDL_image.h"
-#include "SDL/SDL_ttf.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -302,6 +301,7 @@ bool Game::Initialize(){
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
         LoadData();
 		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
+        TTF_Init();
 		prevTime = SDL_GetTicks();
         return true;
     }
@@ -334,6 +334,10 @@ void Game::UpdateGame(){
         deltaTime = 0.05f;
     }
     prevTime = currTime;
+    if (score < 0){
+        score = 0;
+    }
+    score += deltaTime * 100;
     std::vector<Actor*> temp = actors;
     for (Actor* a : temp){
         a->Update(deltaTime);
@@ -355,7 +359,26 @@ void Game::GenerateOutput(){
     for (unsigned int i = 0; i < mSprites.size(); i++){
         mSprites[i]->Draw(renderer);
     }
+    TTF_Font* font = TTF_OpenFont("ARCADECLASSIC.TTF", 24);
+    SDL_Color White = {255, 255, 255};
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    SDL_Rect Message_rect;
+    Message_rect.x = 20;
+    Message_rect.y = 0;
+    int digits = 0;
+    int temp = score;
+    while (temp) {
+        temp /= 10;
+        digits++;
+    }
+    Message_rect.w = digits * 25;
+    Message_rect.h = 50;
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
     SDL_RenderPresent(renderer);
+    SDL_FreeSurface(surfaceMessage);
+    TTF_CloseFont(font);
+    SDL_DestroyTexture(Message);
 }
 
 //MYSQL *connection, mysql;
@@ -449,6 +472,7 @@ void Game::RunLoop(){
 void Game::Shutdown(){
     UnloadData();
     IMG_Quit();
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     Mix_CloseAudio();

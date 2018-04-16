@@ -27,6 +27,7 @@ void BarrelMove::Update(float deltaTime){
     if (mOwner->GetCollision()->Intersect(mOwner->GetGame()->GetPlayer()->GetCollision())){
         if (!mOwner->GetGame()->GetPlayer()->GetInvulnerable()){
             Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
+            mOwner->GetGame()->AddScore(-1000);
             mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 0.0f));
         }
 

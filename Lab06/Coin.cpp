@@ -18,6 +18,7 @@ Coin::Coin(class Game* game):Actor(game){
 void Coin::UpdateActor(float deltaTime){
     if (this->GetCollision()->Intersect(this->GetGame()->GetPlayer()->GetCollision())){
         Mix_PlayChannel(-1, this->GetGame()->GetSound("Assets/Crystal/Crystal.wav"), 0);
+        this->GetGame()->AddScore(200);
         this->SetState(Actor::EDead);
     }
     if (this->GetPosition().x - this->GetGame()->GetCameraPos().x < -this->GetCollision()->GetWidth()/2){
