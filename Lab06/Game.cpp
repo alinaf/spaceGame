@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <string>
-#include "mysql.h"  
+#include "mysql.h"
 #pragma comment(lib, "libmysql")
 #pragma comment(lib, "mysqlclient")
 using namespace std;
@@ -176,7 +176,7 @@ void Game::LoadData(){
 }
 
 void Game::LoadNextLevel(){
-    if (levelIndex > 4){
+    if (levelIndex > 5){
         levelIndex = 0;
     }
     std::string filename = "Assets/level" + std::to_string(levelIndex) + ".txt";
