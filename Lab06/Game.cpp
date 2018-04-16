@@ -55,25 +55,25 @@ void Game::LoadSound(const std::string& filename){
     sounds[filename] = sound;
 
 	if (filename == "Assets/Music/LastParadise.wav") {
-		Mix_VolumeChunk(sound, 50);
-	}
-	else if (filename == "Assets/Sounds/PowerUp.wav") {
-		Mix_VolumeChunk(sound, 90);
-	} 
-	else if (filename == "Assets/Sounds/PowerDown.wav") {
-		Mix_VolumeChunk(sound, 110);
-	}
-	else if (filename == "Assets/Player/Falling.wav") {
-		Mix_VolumeChunk(sound, 80);
-	}
-	else if (filename == "Assets/Player/Scream.wav") {
-		Mix_VolumeChunk(sound, 80);
-	}
-	else if (filename == "Assets/Player/Jump.wav") {
 		Mix_VolumeChunk(sound, 30);
 	}
-	else if (filename == "Assets/Coin/coin.wav") {
-		Mix_VolumeChunk(sound, 50);
+	else if (filename == "Assets/Sounds/PowerUp.wav") {
+		Mix_VolumeChunk(sound, 70);
+	} 
+	else if (filename == "Assets/Sounds/PowerDown.wav") {
+		Mix_VolumeChunk(sound, 90);
+	}
+	else if (filename == "Assets/Player/Falling.wav") {
+		Mix_VolumeChunk(sound, 60);
+	}
+	else if (filename == "Assets/Player/Scream.wav") {
+		Mix_VolumeChunk(sound, 60);
+	}
+	else if (filename == "Assets/Player/Jump.wav") {
+		Mix_VolumeChunk(sound, 10);
+	}
+	else if (filename == "Assets/Crystal/Crystal.wav") {
+		Mix_VolumeChunk(sound, 128);
 	}
 }
 
@@ -101,13 +101,13 @@ void Game::LoadData(){
     LoadTexture("Assets/Background/Mid_0.png");
     LoadTexture("Assets/Background/Mid_1.png");
     LoadTexture("Assets/Background/Mid_2.png");
-    LoadTexture("Assets/Background/Fore_0.png");
+	LoadTexture("Assets/Background/Fore_0.png");
     LoadTexture("Assets/Background/Fore_1.png");
     LoadTexture("Assets/Background/Fore_2.png");
     LoadTexture("Assets/doge.png");
     
     for (int i = 1; i < 17; i++){
-        std::string filename = "Assets/Coin/crystal" + std::to_string(i) + ".png";
+        std::string filename = "Assets/Crystal/crystal" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
     }
     
@@ -128,7 +128,7 @@ void Game::LoadData(){
 	LoadSound("Assets/Player/Falling.wav");
 	LoadSound("Assets/Player/Scream.wav");
 	LoadSound("Assets/Player/Jump.wav");
-	LoadSound("Assets/Coin/coin.wav");
+	LoadSound("Assets/Crystal/Crystal.wav");
 
 	Actor* sky = new Actor(this);
     Actor* mid = new Actor(this);
@@ -198,7 +198,7 @@ void Game::LoadNextLevel(){
                     Coin* c = new Coin(this);
                     AnimatedSprite* as = new AnimatedSprite(c);
                     for (int i = 1; i < 9; i++){
-                        std::string filename = "Assets/Coin/crystal" + std::to_string(i) + ".png";
+                        std::string filename = "Assets/Crystal/crystal" + std::to_string(i) + ".png";
                         as->AddImage(GetTexture(filename.c_str()));
                     }
                     c->SetSprite(as);
