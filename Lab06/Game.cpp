@@ -7,8 +7,8 @@
 #include "Game.h"
 #include "Actor.h"
 #include "SDL/SDL_image.h"
+#include "SDL/SDL_ttf.h"
 #include <fstream>
-
 #include <iostream>
 #include <string>
 //#include "mysql.h"
