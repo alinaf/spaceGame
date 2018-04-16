@@ -44,7 +44,7 @@ void Player::UpdateActor(float deltaTime){
             mSprite = temp;
         }
     }
-    if (invulnerableTimer > 5.5f){
+    if (invulnerableTimer > 5.0f){
         invulnerableTimer = 0.0f;
         mInvulnerable = false;
         if (currSprite != "run"){
