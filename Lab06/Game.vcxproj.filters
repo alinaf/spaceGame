@@ -22,6 +22,54 @@
     <ClCompile Include="Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Barrel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrelMove.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BarrelSpawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Invulnerability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoonBounce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedBoost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -34,6 +82,54 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Barrel.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BarrelMove.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BarrelSpawner.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invulnerability.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoonBounce.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMove.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedBoost.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
