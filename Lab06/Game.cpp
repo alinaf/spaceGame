@@ -76,7 +76,7 @@ void Game::LoadSound(const std::string& filename){
 		Mix_VolumeChunk(sound, 30);
 	}
     else if (filename == "Assets/Sounds/Gravity.wav") {
-        Mix_VolumeChunk(sound, 10);
+        Mix_VolumeChunk(sound, 20);
     }
 }
 
