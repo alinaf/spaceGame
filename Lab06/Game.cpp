@@ -164,7 +164,7 @@ void Game::LoadData(){
 }
 
 void Game::LoadNextLevel(){
-    if (levelIndex > 2){
+    if (levelIndex > 4){
         levelIndex = 0;
     }
     std::string filename = "Assets/level" + std::to_string(levelIndex) + ".txt";
