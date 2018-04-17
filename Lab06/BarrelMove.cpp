@@ -8,7 +8,9 @@
 #include "Actor.h"
 #include "Game.h"
 #include "Player.h"
+#ifndef _WIN32
 #include <ranlib.h>
+#endif
 #include "Explosion.h"
 
 BarrelMove::BarrelMove(class Actor* owner):MoveComponent(owner){

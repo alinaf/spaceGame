@@ -43,6 +43,11 @@ public:
     void LoadNextLevel();
     int numLevels;
     void AddScore(int num) {score += num;}
+
+	int mp_isGuest;
+	int mp_userID;
+	int mp_gameID;
+	std::string mp_svrIP;
     
 private:
     SDL_Window* window;

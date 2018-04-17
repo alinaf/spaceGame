@@ -21,6 +21,7 @@
     <ClInclude Include="Coin.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Invulnerability.h" />
     <ClInclude Include="Item.h" />
@@ -43,6 +44,7 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Invulnerability.cpp" />
     <ClCompile Include="Item.cpp" />
