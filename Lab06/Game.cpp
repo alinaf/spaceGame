@@ -84,6 +84,9 @@ void Game::LoadSound(const std::string& filename){
     else if (filename == "Assets/Sounds/Gravity.wav") {
         Mix_VolumeChunk(sound, 20);
     }
+    else if (filename == "Assets/Sounds/explosion.wav"){
+        Mix_VolumeChunk(sound, 10);
+    }
 }
 
 Mix_Chunk* Game::GetSound(const std::string& filename){
@@ -150,6 +153,16 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+    for (int i = 1; i < 12; i++){
+        std::string filename = "Assets/glitch_meteor/meteor000" + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
+    for (int i = 1; i < 11; i++){
+        std::string filename = "Assets/Bubble_Explo/bubble_explo" + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
 	LoadSound("Assets/Music/LastParadise.wav");
 	LoadSound("Assets/Sounds/PowerUp.wav");
 	LoadSound("Assets/Sounds/PowerDown.wav");
@@ -158,6 +171,7 @@ void Game::LoadData(){
 	LoadSound("Assets/Player/Scream.wav");
 	LoadSound("Assets/Player/Jump.wav");
 	LoadSound("Assets/Crystal/Crystal.wav");
+    LoadSound("Assets/Sounds/explosion.wav");
 
 
 	Actor* sky = new Actor(this);

@@ -9,17 +9,28 @@
 #include "Game.h"
 #include "Player.h"
 #include <ranlib.h>
+#include "Explosion.h"
 
 BarrelMove::BarrelMove(class Actor* owner):MoveComponent(owner){
     SetForwardSpeed(-100.0f - (rand()%10) * 25.0f);
-    SetAngularSpeed(-2*Math::Pi);
+//    SetAngularSpeed(-2*Math::Pi);
 }
 
 void BarrelMove::Update(float deltaTime){
     mOwner->SetPosition(Vector2(mOwner->GetPosition().x + deltaTime * GetForwardSpeed(), mOwner->GetPosition().y + deltaTime*300.0f));
-    mOwner->SetRotation(mOwner->GetRotation() + GetAngularSpeed()*deltaTime);
+    mOwner->SetRotation(Math::Atan2(GetForwardSpeed(), 300.0f));
     for (Block* a : mOwner->GetGame()->GetBlocks()){
         if (a->GetCollision()->Intersect(mOwner->GetCollision())){
+            Explosion* ex = new Explosion(mOwner->GetGame());
+            AnimatedSprite* as = new AnimatedSprite(ex);
+            for (int i = 1; i < 11; i++){
+                std::string filename = "Assets/Bubble_Explo/bubble_explo" + std::to_string(i) + ".png";
+                as->AddImage(mOwner->GetGame()->GetTexture(filename.c_str()));
+            }
+            ex->SetSprite(as);
+            ex->SetPosition(mOwner->GetPosition());
+            ex->SetScale(1.5f);
+            Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Sounds/explosion.wav"), 0);
             mOwner->SetState(Actor::EDead);
             a->SetState(Actor::EDead);
         }
