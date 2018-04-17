@@ -300,7 +300,7 @@ bool Game::Initialize(){
         speed.y = 80;
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
         LoadData();
-		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), 0);
+		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), -1);
         TTF_Init();
 		prevTime = SDL_GetTicks();
         return true;
