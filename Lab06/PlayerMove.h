@@ -23,6 +23,8 @@ public:
     void Update(float deltaTime) override;
     void SetSpeedMult(float num) {mSpeedMult = num;}
     void SetGravity(float g) {mGravity = g;}
+    int GetLives() {return mLives;}
+    void DecreaseLives() {mLives--;}
 private:
     float mYSpeed = 0.0f;
     bool mSpacePressed;
@@ -34,6 +36,7 @@ private:
     float mSpeedBoostTimer = 0.0f;
     float mGravity = 2000.0f;
     float mMoonBounceTimer = 0.0f;
+    int mLives = 3;
 };
 
 #endif /* PlayerMove_h */

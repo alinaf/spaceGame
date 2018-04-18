@@ -49,6 +49,7 @@ void PlayerMove::ProcessInput(const Uint8* keyState){
 void PlayerMove::Update(float deltaTime){
     if (mSpeedMult == 2.0f){
         mSpeedBoostTimer += deltaTime;
+        mOwner->GetGame()->AddScore(100 * deltaTime);
         if (mSpeedBoostTimer > 4.0f){ 
 			var++;
             mSpeedMult = 1.0f;
@@ -113,6 +114,7 @@ void PlayerMove::Update(float deltaTime){
     if (mOwner->GetPosition().y > 768.0f) {
 		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
         mOwner->GetGame()->AddScore(-2000);
+        DecreaseLives();
         ((Player*) mOwner)->SetInvulnerable(true);
 		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 0.0f));
         mInAir = false;

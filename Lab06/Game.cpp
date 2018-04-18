@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "PlayerMove.h"
 //#include "mysql.h"
 //#pragma comment(lib, "libmysql")
 //#pragma comment(lib, "mysqlclient")
@@ -117,6 +118,7 @@ void Game::LoadData(){
     LoadTexture("Assets/Background/Fore_1.png");
     LoadTexture("Assets/Background/Fore_2.png");
     LoadTexture("Assets/doge.png");
+    LoadTexture("Assets/gameover.png");
     
     for (int i = 1; i < 17; i++){
         std::string filename = "Assets/Crystal/crystal" + std::to_string(i) + ".png";
@@ -347,6 +349,11 @@ void Game::UpdateGame(){
     if (deltaTime > 0.05f){
         deltaTime = 0.05f;
     }
+    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() < 0){
+        mult = 0;
+        Mix_Pause(1);
+    }
+    deltaTime *= mult;
     prevTime = currTime;
     if (score < 0){
         score = 0;
@@ -373,6 +380,7 @@ void Game::GenerateOutput(){
     for (unsigned int i = 0; i < mSprites.size(); i++){
         mSprites[i]->Draw(renderer);
     }
+    
     TTF_Font* font = TTF_OpenFont("ARCADECLASSIC.TTF", 24);
     SDL_Color White = {255, 255, 255};
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
@@ -389,10 +397,33 @@ void Game::GenerateOutput(){
     Message_rect.w = digits * 25;
     Message_rect.h = 50;
     SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+    
+    SDL_Surface* lives = TTF_RenderText_Solid(font, ("x" + std::to_string(((PlayerMove*) mPlayer->GetMovement())->GetLives())).c_str(), White);
+    SDL_Texture* livesMessage = SDL_CreateTextureFromSurface(renderer, lives);
+    SDL_Rect lives_rect;
+    lives_rect.x = 1024-70;
+    lives_rect.y = 0;
+    lives_rect.w = 50;
+    lives_rect.h = 50;
+    SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
+    
+    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() < 0){
+        SDL_Rect gameover_rect;
+        gameover_rect.x = 0;
+        gameover_rect.y = 0;
+        gameover_rect.w = 1024;
+        gameover_rect.h = 768;
+        SDL_RenderCopy(renderer, GetTexture("Assets/gameover.png"), NULL, &gameover_rect);
+    }
+    
+    
     SDL_RenderPresent(renderer);
+    
     SDL_FreeSurface(surfaceMessage);
+    SDL_FreeSurface(lives);
     TTF_CloseFont(font);
     SDL_DestroyTexture(Message);
+    SDL_DestroyTexture(livesMessage);
 }
 
 //MYSQL *connection, mysql;

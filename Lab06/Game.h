@@ -76,4 +76,5 @@ private:
     Vector2 mCameraPos;
     int levelIndex;
     int score = 0;
+    int mult = 1;
 };
