@@ -10,6 +10,7 @@
 #include "Player.h"
 #include <ranlib.h>
 #include "Explosion.h"
+#include "PlayerMove.h"
 
 BarrelMove::BarrelMove(class Actor* owner):MoveComponent(owner){
     SetForwardSpeed(-100.0f - (rand()%10) * 25.0f);
@@ -39,6 +40,7 @@ void BarrelMove::Update(float deltaTime){
         if (!mOwner->GetGame()->GetPlayer()->GetInvulnerable()){
             Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Scream.wav"), 0);
             mOwner->GetGame()->AddScore(-1000);
+            mOwner->GetGame()->GetPlayer()->SetInvulnerable(true);
             mOwner->GetGame()->GetPlayer()->SetPosition(Vector2(mOwner->GetGame()->GetPlayer()->GetPosition().x, 0.0f));
         }
 

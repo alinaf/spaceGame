@@ -9,6 +9,7 @@
 #include "Game.h"
 #include "SDL/SDL_mixer.h"
 #include <iostream>
+#include "Player.h"
 
 using namespace std;
 
@@ -112,6 +113,7 @@ void PlayerMove::Update(float deltaTime){
     if (mOwner->GetPosition().y > 768.0f) {
 		Mix_PlayChannel(-1, mOwner->GetGame()->GetSound("Assets/Player/Falling.wav"), 0);
         mOwner->GetGame()->AddScore(-2000);
+        ((Player*) mOwner)->SetInvulnerable(true);
 		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 0.0f));
         mInAir = false;
     }
@@ -132,4 +134,7 @@ void PlayerMove::Update(float deltaTime){
 //        mult = 1;
 //    }
     mYSpeed += deltaTime*mGravity;
+    if (mYSpeed > 1000.0f){
+        mYSpeed = 1000.0f;
+    }
 }
