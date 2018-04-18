@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include "BarrelSpawner.h"
 #include "Game.h"
+#ifndef _WIN32
 #include <ranlib.h>
+#endif
 
 BarrelSpawner::BarrelSpawner(Game* game): Actor(game){
     timer = 3.0f;
