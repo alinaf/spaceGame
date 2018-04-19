@@ -58,4 +58,11 @@ void Player::UpdateActor(float deltaTime){
             mSprite = temp;
         }
     }
+    if (doubleCoin){
+        doubleCoinTimer += deltaTime;
+        if (doubleCoinTimer > 5.0f){
+            doubleCoin = false;
+            doubleCoinTimer = 0.0f;
+        }
+    }
 }

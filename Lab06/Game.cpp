@@ -155,6 +155,11 @@ void Game::LoadData(){
         LoadTexture(filename.c_str());
     }
     
+    for (int i = 1; i < 7; i++){
+        std::string filename = "Assets/Yellow/frame " + std::to_string(i) + ".png";
+        LoadTexture(filename.c_str());
+    }
+    
     for (int i = 1; i < 12; i++){
         std::string filename = "Assets/glitch_meteor/meteor000" + std::to_string(i) + ".png";
         LoadTexture(filename.c_str());
@@ -280,6 +285,16 @@ void Game::LoadNextLevel(){
                     in->SetSprite(as);
                     in->SetPosition(Vector2(x,y - 16));
                 }
+                else if (a == 'X'){
+                    DoubleCoin* in = new DoubleCoin(this);
+                    AnimatedSprite* as = new AnimatedSprite(in);
+                    for (int i = 1; i < 7; i++){
+                        std::string filename = "Assets/Yellow/frame " + std::to_string(i) + ".png";
+                        as->AddImage(GetTexture(filename.c_str()));
+                    }
+                    in->SetSprite(as);
+                    in->SetPosition(Vector2(x,y - 16));
+                }
                 else{
                     Block* b = new Block(this);
                     b->SetTexture(a);
@@ -349,7 +364,7 @@ void Game::UpdateGame(){
     if (deltaTime > 0.05f){
         deltaTime = 0.05f;
     }
-    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() < 0){
+    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() == 0){
         mult = 0;
         Mix_Pause(1);
     }
@@ -383,6 +398,16 @@ void Game::GenerateOutput(){
     
     TTF_Font* font = TTF_OpenFont("ARCADECLASSIC.TTF", 24);
     SDL_Color White = {255, 255, 255};
+    
+    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() == 0){
+        SDL_Rect gameover_rect;
+        gameover_rect.x = 0;
+        gameover_rect.y = 0;
+        gameover_rect.w = 1024;
+        gameover_rect.h = 768;
+        SDL_RenderCopy(renderer, GetTexture("Assets/gameover.png"), NULL, &gameover_rect);
+    }
+    
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
     SDL_Rect Message_rect;
@@ -393,6 +418,9 @@ void Game::GenerateOutput(){
     while (temp) {
         temp /= 10;
         digits++;
+    }
+    if (score == 0){
+        digits = 1;
     }
     Message_rect.w = digits * 25;
     Message_rect.h = 50;
@@ -406,16 +434,6 @@ void Game::GenerateOutput(){
     lives_rect.w = 50;
     lives_rect.h = 50;
     SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
-    
-    if (((PlayerMove*) mPlayer->GetMovement())->GetLives() < 0){
-        SDL_Rect gameover_rect;
-        gameover_rect.x = 0;
-        gameover_rect.y = 0;
-        gameover_rect.w = 1024;
-        gameover_rect.h = 768;
-        SDL_RenderCopy(renderer, GetTexture("Assets/gameover.png"), NULL, &gameover_rect);
-    }
-    
     
     SDL_RenderPresent(renderer);
     

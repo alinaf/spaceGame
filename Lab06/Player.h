@@ -17,10 +17,14 @@ public:
     void UpdateActor(float deltaTime) override;
     void SetInvulnerable(bool b) {mInvulnerable = b;}
     bool GetInvulnerable() {return mInvulnerable;}
+    void SetDoubleCoin(bool b) {doubleCoin = b;}
+    bool GetDoubleCoin() {return doubleCoin;}
 private:
     bool mInvulnerable = false;
     float invulnerableTimer = 0.0f;
     std::string currSprite = "run";
+    bool doubleCoin = false;
+    float doubleCoinTimer = 0.0f;
 //    AnimatedSprite* rainbow;
 //    AnimatedSprite* run;
 };

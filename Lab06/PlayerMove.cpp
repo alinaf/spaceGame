@@ -117,7 +117,7 @@ void PlayerMove::Update(float deltaTime){
         DecreaseLives();
         ((Player*) mOwner)->SetInvulnerable(true);
 		mOwner->SetPosition(Vector2(mOwner->GetPosition().x + 64*3, 0.0f));
-        mInAir = false;
+        mInAir = true;
     }
     
     mOwner->GetGame()->SetCameraPos(Vector2(mOwner->GetPosition().x - 512, 0));

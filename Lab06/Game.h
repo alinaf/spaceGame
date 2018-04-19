@@ -19,6 +19,7 @@
 #include "SpeedBoost.h"
 #include "Invulnerability.h"
 #include "MoonBounce.h"
+#include "DoubleCoin.h"
 
 class Actor;
 

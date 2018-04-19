@@ -14,6 +14,7 @@
 		92924F9C1EDF6DC800A740A7 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92924F9A1EDF6DC800A740A7 /* Game.cpp */; };
 		92D324FD1B697428005A86C7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D324FC1B697428005A86C7 /* CoreFoundation.framework */; };
 		92E46E941B6353E50035CD21 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E46E931B6353E50035CD21 /* OpenGL.framework */; };
+		E3010C5B20883E09003E2A63 /* DoubleCoin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3010C5A20883E09003E2A63 /* DoubleCoin.cpp */; };
 		E3034C8F2085EE32005909FC /* Explosion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3034C8E2085EE32005909FC /* Explosion.cpp */; };
 		E347642D203FC8A500A14B6D /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E347642C203FC8A500A14B6D /* Background.cpp */; };
 		E354ABA0203FC412006FDABF /* BarrelMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E354AB8F203FC40F006FDABF /* BarrelMove.cpp */; };
@@ -46,6 +47,8 @@
 		92D324FC1B697428005A86C7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		92E46DF71B634EA30035CD21 /* Game-mac */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Game-mac"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92E46E931B6353E50035CD21 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E3010C5A20883E09003E2A63 /* DoubleCoin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DoubleCoin.cpp; sourceTree = "<group>"; };
+		E3010C5C20883E14003E2A63 /* DoubleCoin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleCoin.h; sourceTree = "<group>"; };
 		E3034C8E2085EE32005909FC /* Explosion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Explosion.cpp; sourceTree = "<group>"; };
 		E3034C902085EE3A005909FC /* Explosion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Explosion.h; sourceTree = "<group>"; };
 		E347642B203FC89A00A14B6D /* Background.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				E354AB90203FC40F006FDABF /* CollisionComponent.h */,
 				927612BF1F466FA50069B824 /* Component.cpp */,
 				927612C01F466FA50069B824 /* Component.h */,
+				E3010C5A20883E09003E2A63 /* DoubleCoin.cpp */,
+				E3010C5C20883E14003E2A63 /* DoubleCoin.h */,
 				92D324FC1B697428005A86C7 /* CoreFoundation.framework */,
 				92924F9A1EDF6DC800A740A7 /* Game.cpp */,
 				92924F9B1EDF6DC800A740A7 /* Game.h */,
@@ -237,6 +242,7 @@
 				E354ABA6203FC412006FDABF /* SpriteComponent.cpp in Sources */,
 				E354ABA0203FC412006FDABF /* BarrelMove.cpp in Sources */,
 				E3BABBF12082C789007D546C /* SpeedBoost.cpp in Sources */,
+				E3010C5B20883E09003E2A63 /* DoubleCoin.cpp in Sources */,
 				E354ABA1203FC412006FDABF /* PlayerMove.cpp in Sources */,
 				927612C31F466FA50069B824 /* Actor.cpp in Sources */,
 				927612C41F466FA50069B824 /* Component.cpp in Sources */,

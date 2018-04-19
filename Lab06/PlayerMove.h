@@ -24,7 +24,7 @@ public:
     void SetSpeedMult(float num) {mSpeedMult = num;}
     void SetGravity(float g) {mGravity = g;}
     int GetLives() {return mLives;}
-    void DecreaseLives() {mLives--;}
+    void DecreaseLives() {mLives--; if (mLives < 0) mLives = 0;}
 private:
     float mYSpeed = 0.0f;
     bool mSpacePressed;

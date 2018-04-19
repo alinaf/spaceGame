@@ -1,31 +1,30 @@
-
 //
-//  Coin.cpp
+//  DoubleCoin.cpp
 //  Game-mac
 //
-
+//  Created by tml on 4/18/18.
+//  Copyright © 2018 Sanjay Madhav. All rights reserved.
+//
 
 #include <stdio.h>
-#include "Coin.h"
 #include "Game.h"
+#include "DoubleCoin.h"
+#include "Coin.h"
 #include "Player.h"
 
-Coin::Coin(class Game* game):Actor(game){
+DoubleCoin::DoubleCoin(class Game* game):Actor(game){
     mSprite = new SpriteComponent(this);
     mCollision = new CollisionComponent(this);
     mCollision->SetSize(32, 32);
 }
 
-void Coin::UpdateActor(float deltaTime){
+void DoubleCoin::UpdateActor(float deltaTime){
     if (this->GetCollision()->Intersect(this->GetGame()->GetPlayer()->GetCollision())){
-        Mix_PlayChannel(-1, this->GetGame()->GetSound("Assets/Crystal/Crystal.wav"), 0);
-        this->GetGame()->AddScore(200);
-        if (GetGame()->GetPlayer()->GetDoubleCoin()){
-            this->GetGame()->AddScore(200);
-        }
+        GetGame()->GetPlayer()->SetDoubleCoin(true);
         this->SetState(Actor::EDead);
     }
     if (this->GetPosition().x - this->GetGame()->GetCameraPos().x < -this->GetCollision()->GetWidth()/2){
         this->SetState(Actor::EDead);
+        
     }
 }
