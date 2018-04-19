@@ -11,9 +11,9 @@
 #include <iostream>
 #include <string>
 #include "PlayerMove.h"
-//#include "mysql.h"
-//#pragma comment(lib, "libmysql")
-//#pragma comment(lib, "mysqlclient")
+#include "mysql.h"
+#pragma comment(lib, "libmysql")
+#pragma comment(lib, "mysqlclient")
 using namespace std;
 
 Game::Game(){
@@ -341,6 +341,12 @@ bool Game::Initialize(){
         LoadData();
 		Mix_PlayChannel(1, GetSound("Assets/Music/LastParadise.wav"), -1);
         TTF_Init();
+
+		mysql_init(&mysql);
+		connection = mysql_real_connect(&mysql, mp_svrIP.c_str(), "root", "root", "CS201Proj", 0, 0, 0);
+		if (connection == NULL)
+			cout << mysql_error(&mysql) << endl;
+
 		prevTime = SDL_GetTicks();
         return true;
     }
@@ -410,6 +416,9 @@ void Game::GenerateOutput(){
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
     
+	SDL_Surface* sMessage = TTF_RenderText_Solid(font, std::to_string(GetOpponentScore()).c_str(), White);
+	SDL_Texture* opponentScore = SDL_CreateTextureFromSurface(renderer, sMessage);
+
     SDL_Surface* lives = TTF_RenderText_Solid(font, ("x" + std::to_string(((PlayerMove*) mPlayer->GetMovement())->GetLives())).c_str(), White);
     SDL_Texture* livesMessage = SDL_CreateTextureFromSurface(renderer, lives);
     
@@ -435,8 +444,25 @@ void Game::GenerateOutput(){
         Message_rect.w = digits * 50;
         Message_rect.h = 100;
         Message_rect.x = 1024/2 - Message_rect.w/2;
-        Message_rect.y = 550;
+        Message_rect.y = 530;
         SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+
+		SDL_Rect opponentScore_rect;
+		digits = 0;
+		temp = GetOpponentScore();
+		while (temp) {
+			temp /= 10;
+			digits++;
+		}
+		if (GetOpponentScore() == 0) {
+			digits = 1;
+		}
+		opponentScore_rect.w = digits * 50;
+		opponentScore_rect.h = 100;
+		opponentScore_rect.x = 1024 / 2 - opponentScore_rect.w / 2;
+		opponentScore_rect.y = 600;
+		SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
+
     }
     
     else{
@@ -462,7 +488,24 @@ void Game::GenerateOutput(){
         lives_rect.w = 50;
         lives_rect.h = 50;
         SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
-    }
+    
+		SDL_Rect opponentScore_rect;
+		opponentScore_rect.x = 500;
+		opponentScore_rect.y = 0;
+		digits = 0;
+		temp = GetOpponentScore();
+		while (temp) {
+			temp /= 10;
+			digits++;
+		}
+		if (GetOpponentScore() == 0) {
+			digits = 1;
+		}
+		opponentScore_rect.w = digits * 25;
+		opponentScore_rect.h = 50;
+		SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
+
+	}
     
     
     
@@ -475,79 +518,53 @@ void Game::GenerateOutput(){
     SDL_DestroyTexture(livesMessage);
 }
 
-//MYSQL *connection, mysql;
-//MYSQL_ROW row;
-//
-//MYSQL_RES* mysql_perform_query(MYSQL *connection, char *sql_query)
-//{
-//    if (mysql_query(connection, sql_query))
-//    {
-//        printf("MySQL query error : %s\n", mysql_error(connection));
-//        exit(1);
-//    }
-//    return mysql_use_result(connection);
-//}
-//
-////get the score from Databse where you need the gamename and whether your friend is playerA or playerB
-//int getScoreFromDatabase(string gamename, bool isHost) {
-//    MYSQL_RES *result;
-//    string str = "SELECT pointA, pointB FROM Game WHERE gameName = '" + gamename + "' ;";
-//    int tmp = -1;
-//    result = mysql_perform_query(connection, (char *)str.c_str());
-//    while ((row = mysql_fetch_row(result)) != NULL) {
-//        //printf("%s %s\n", row[0], row[1]);
-//        if (isHost)
-//            tmp = stoi(row[0]);
-//        else
-//            tmp = stoi(row[1]);
-//    }
-//    mysql_free_result(result);
-//    return tmp;
-//}
-//
-////update your new score where you need the gamename and whether you are playerA or playerB
-//int updateScoreToDatabase(string gamename, int newScore, bool isHost) {
-//    string str = "";
-//    if (isHost)
-//        str = "UPDATE Game SET pointA = " + to_string(newScore) + " WHERE gameName = '" + gamename + "' ;";
-//    else
-//        str = "UPDATE Game SET pointB = " + to_string(newScore) + " WHERE gameName = '" + gamename + "' ;";
-//    MYSQL_RES *result;
-//    result = mysql_perform_query(connection, (char *)str.c_str());
-//    mysql_free_result(result);
-//    return 0;
-//}
-//
-////nothing .. for test
-//int displayGameTable(string gamename) {
-//    MYSQL_RES *result;
-//    string str = "SELECT U1.userName, pointA, U2.userName, pointB FROM Game, Users U1, Users U2 WHERE Game.gameName = '" + gamename + "' AND U1.userID=Game.userAID AND U2.userID=Game.userBID;";
-//    result = mysql_perform_query(connection, (char *)str.c_str());
-//    printf("MySQL Tables in mysql database:\n");
-//    while ((row = mysql_fetch_row(result)) != NULL)
-//        printf("%s %s %s %s\n", row[0], row[1], row[2], row[3]);
-//    mysql_free_result(result);
-//    return 0;
-//}
-//
-//int databaseconnect()
-//{
-//    int a;
-//    mysql_init(&mysql);
-//    connection = mysql_real_connect(&mysql, "localhost", "root", "root", "CS201Proj", 0, 0, 0);
-//    if (connection == NULL)
-//        cout << mysql_error(&mysql) << endl;
-//
-//    //displayGameTable("Test111");
-//    cout << "Your score: " << getScoreFromDatabase("Test111", true) << "    Your friend's score: " << getScoreFromDatabase("Test111", false) << endl;
-//    updateScoreToDatabase("Test111", (int) (rand() * 10), true);
-//    /*updateScoreToDatabase("Test111", 77, true);
-//    displayGameTable("Test111");
-//    cin >> a;*/
-//
-//    mysql_close(connection);
-//    return 0;
-//}
+MYSQL_ROW row;
+
+MYSQL_RES* mysql_perform_query(MYSQL *connection, char *sql_query)
+{
+	if (mysql_query(connection, sql_query))
+	{
+		printf("MySQL query error : %s\n", mysql_error(connection));
+		exit(1);
+	}
+	return mysql_use_result(connection);
+}
+
+//get the score from Databse where you need the gamename and whether your friend is playerA or playerB
+int getScoreFromDatabase(MYSQL *connection, string gamename, int userID) {
+	MYSQL_RES *result;
+	string str = "SELECT points FROM Game WHERE userID = " + to_string(userID) + " AND gameName = '" + gamename + "' ;";
+	int tmp = -1;
+	result = mysql_perform_query(connection, (char *)str.c_str());
+	while ((row = mysql_fetch_row(result)) != NULL) {
+		//printf("%s %s\n", row[0], row[1]);
+		tmp = stoi(row[0]);
+	}
+	mysql_free_result(result);
+	return tmp;
+}
+
+//update your new score where you need the gamename and whether you are playerA or playerB
+int updateScoreToDatabase(MYSQL *connection, string gamename, int newScore, int userID) {
+	string str = "";
+	str = "UPDATE Game SET points = " + to_string(newScore) + " WHERE userID = " + std::to_string(userID) + " AND gameName = '" + gamename + "' ;";
+	MYSQL_RES *result;
+	result = mysql_perform_query(connection, (char *)str.c_str());
+	mysql_free_result(result);
+	return 0;
+}
+
+int databaseconnect(Game* game)
+{
+	int a;
+	int newOpponentScore = getScoreFromDatabase(game->connection, game->mp_gameName, game->mp_friendUserID);
+	game->SetOpponentScore(newOpponentScore);
+	std::cout << newOpponentScore << endl;
+	cout << "Your score: " << getScoreFromDatabase(game->connection, game->mp_gameName, game->mp_yourUserID) << "Your friend's score: " << getScoreFromDatabase(game->connection, game->mp_gameName, game->mp_friendUserID) << endl;
+	updateScoreToDatabase(game->connection, game->mp_gameName, (int)(game->GetScore()), game->mp_yourUserID);
+
+	return 0;
+}
 
 void Game::RunLoop(){
 	int waittime = 0;
@@ -556,7 +573,7 @@ void Game::RunLoop(){
         UpdateGame();
 		waittime++;
 		if (waittime >= 500) {
-			//databaseconnect();
+			databaseconnect(this);
 			waittime = 0;
 		}
         GenerateOutput();
@@ -571,4 +588,5 @@ void Game::Shutdown(){
     SDL_DestroyWindow(window);
     Mix_CloseAudio();
     SDL_Quit();
+	mysql_close(connection);
 }

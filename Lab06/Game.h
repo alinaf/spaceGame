@@ -21,6 +21,10 @@
 #include "MoonBounce.h"
 #include "DoubleCoin.h"
 
+#include "mysql.h"
+#pragma comment(lib, "libmysql")
+#pragma comment(lib, "mysqlclient")
+
 class Actor;
 
 
@@ -43,12 +47,19 @@ public:
     void SetCameraPos(const Vector2& cameraPos);
     void LoadNextLevel();
     int numLevels;
+
     void AddScore(int num) {score += num;}
+	int GetScore() { return score; }
+	int GetOpponentScore() { return opponentScore; }
+	void SetOpponentScore(int newScore) { opponentScore = newScore; }
 
 	int mp_isGuest;
-	int mp_userID;
-	int mp_gameID;
+	int mp_yourUserID;
+	int mp_friendUserID;
+	std::string mp_gameName;
 	std::string mp_svrIP;
+
+	MYSQL *connection, mysql;
     
 private:
     SDL_Window* window;
@@ -77,5 +88,6 @@ private:
     Vector2 mCameraPos;
     int levelIndex;
     int score = 0;
+	int opponentScore = 0;
     int mult = 1;
 };
