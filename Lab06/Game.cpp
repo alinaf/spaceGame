@@ -440,7 +440,7 @@ void Game::GenerateOutput(){
         Message_rect.w = digits * 50;
         Message_rect.h = 100;
         Message_rect.x = 1024/2 - Message_rect.w/2;
-        Message_rect.y = 550;
+        Message_rect.y = 530;
         SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
 
 		SDL_Rect opponentScore_rect;
@@ -450,7 +450,7 @@ void Game::GenerateOutput(){
 			temp /= 10;
 			digits++;
 		}
-		if (temp == 0) {
+		if (GetOpponentScore() == 0) {
 			digits = 1;
 		}
 		opponentScore_rect.w = digits * 50;
@@ -494,7 +494,7 @@ void Game::GenerateOutput(){
 			temp /= 10;
 			digits++;
 		}
-		if (temp == 0) {
+		if (GetOpponentScore() == 0) {
 			digits = 1;
 		}
 		opponentScore_rect.w = digits * 25;
@@ -553,12 +553,6 @@ int updateScoreToDatabase(MYSQL *connection, string gamename, int newScore, int 
 int databaseconnect(Game* game)
 {
 	int a;
-
-	cout << "Hello there?" << endl;
-
-	
-
-	//displayGameTable("Test111");
 	int newOpponentScore = getScoreFromDatabase(game->connection, game->mp_gameName, game->mp_friendUserID);
 	game->SetOpponentScore(newOpponentScore);
 	std::cout << newOpponentScore << endl;
