@@ -447,21 +447,24 @@ void Game::GenerateOutput(){
         Message_rect.y = 530;
         SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
 
-		SDL_Rect opponentScore_rect;
-		digits = 0;
-		temp = GetOpponentScore();
-		while (temp) {
-			temp /= 10;
-			digits++;
+		if (mp_isGuest == 0) {
+			SDL_Rect opponentScore_rect;
+			digits = 0;
+			temp = GetOpponentScore();
+			while (temp) {
+				temp /= 10;
+				digits++;
+			}
+			if (GetOpponentScore() == 0) {
+				digits = 1;
+			}
+			opponentScore_rect.w = digits * 50;
+			opponentScore_rect.h = 100;
+			opponentScore_rect.x = 1024 / 2 - opponentScore_rect.w / 2;
+			opponentScore_rect.y = 600;
+			SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
 		}
-		if (GetOpponentScore() == 0) {
-			digits = 1;
-		}
-		opponentScore_rect.w = digits * 50;
-		opponentScore_rect.h = 100;
-		opponentScore_rect.x = 1024 / 2 - opponentScore_rect.w / 2;
-		opponentScore_rect.y = 600;
-		SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
+		
 
     }
     
@@ -489,21 +492,23 @@ void Game::GenerateOutput(){
         lives_rect.h = 50;
         SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
     
-		SDL_Rect opponentScore_rect;
-		opponentScore_rect.x = 500;
-		opponentScore_rect.y = 0;
-		digits = 0;
-		temp = GetOpponentScore();
-		while (temp) {
-			temp /= 10;
-			digits++;
+		if (mp_isGuest == 0) {
+			SDL_Rect opponentScore_rect;
+			opponentScore_rect.x = 500;
+			opponentScore_rect.y = 0;
+			digits = 0;
+			temp = GetOpponentScore();
+			while (temp) {
+				temp /= 10;
+				digits++;
+			}
+			if (GetOpponentScore() == 0) {
+				digits = 1;
+			}
+			opponentScore_rect.w = digits * 25;
+			opponentScore_rect.h = 50;
+			SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
 		}
-		if (GetOpponentScore() == 0) {
-			digits = 1;
-		}
-		opponentScore_rect.w = digits * 25;
-		opponentScore_rect.h = 50;
-		SDL_RenderCopy(renderer, opponentScore, NULL, &opponentScore_rect);
 
 	}
     
@@ -513,9 +518,12 @@ void Game::GenerateOutput(){
     
     SDL_FreeSurface(surfaceMessage);
     SDL_FreeSurface(lives);
+	SDL_FreeSurface(sMessage);
     TTF_CloseFont(font);
     SDL_DestroyTexture(Message);
     SDL_DestroyTexture(livesMessage);
+	SDL_DestroyTexture(opponentScore);
+
 }
 
 MYSQL_ROW row;
@@ -572,7 +580,7 @@ void Game::RunLoop(){
         ProcessInput();
         UpdateGame();
 		waittime++;
-		if (waittime >= 500) {
+		if (waittime >= 500 && mp_isGuest==0) {
 			databaseconnect(this);
 			waittime = 0;
 		}
