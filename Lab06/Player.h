@@ -15,9 +15,9 @@ class Player: public Actor {
 public:
     Player(Game* game);
     void UpdateActor(float deltaTime) override;
-    void SetInvulnerable(bool b) {mInvulnerable = b;}
+    void SetInvulnerable(bool b) {mInvulnerable = b; if (mInvulnerable) invulnerableTimer = 0;}
     bool GetInvulnerable() {return mInvulnerable;}
-    void SetDoubleCoin(bool b) {doubleCoin = b;}
+    void SetDoubleCoin(bool b) {doubleCoin = b; if (doubleCoin) doubleCoinTimer = 0;}
     bool GetDoubleCoin() {return doubleCoin;}
 private:
     bool mInvulnerable = false;

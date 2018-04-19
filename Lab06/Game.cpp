@@ -77,7 +77,7 @@ void Game::LoadSound(const std::string& filename){
 		Mix_VolumeChunk(sound, 60);
 	}
 	else if (filename == "Assets/Player/Jump.wav") {
-		Mix_VolumeChunk(sound, 10);
+		Mix_VolumeChunk(sound, 30);
 	}
 	else if (filename == "Assets/Crystal/Crystal.wav") {
 		Mix_VolumeChunk(sound, 30);
@@ -89,7 +89,10 @@ void Game::LoadSound(const std::string& filename){
         Mix_VolumeChunk(sound, 10);
     }
     else if (filename == "Assets/Sounds/Coin_up.wav"){
-        Mix_VolumeChunk(sound, 40);
+        Mix_VolumeChunk(sound, 50);
+    }
+    else if (filename == "Assets/Sounds/Invincibility.wav"){
+        Mix_VolumeChunk(sound, 30);
     }
 }
 
@@ -183,6 +186,7 @@ void Game::LoadData(){
 	LoadSound("Assets/Crystal/Crystal.wav");
     LoadSound("Assets/Sounds/explosion.wav");
     LoadSound("Assets/Sounds/Coin_up.wav");
+    LoadSound("Assets/Sounds/Invincibility.wav");
 
 
 	Actor* sky = new Actor(this);
