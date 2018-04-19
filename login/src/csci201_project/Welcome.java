@@ -38,16 +38,18 @@ public class Welcome {
 
 class LoginFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private int sizeHeight = 600;
-	private int sizeWidth = 800;
+	private int sizeHeight = 960;
+	private int sizeWidth = 1280;
 	private Welcome parent;
 
 	public LoginFrame() {
 		this.parent = parent;
 		//Set Frame Style
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 			//alternative: "com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
+			// com.sun.java.swing.plaf.gtk.GTKLookAndFeel
+			// com.sun.java.swing.plaf.motif.MotifLookAndFeel
 			// "javax.swing.plaf.nimbus.NimbusLookAndFeel"
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -107,6 +109,7 @@ class loginPanel extends JPanel {
 	public static BufferedReader br;
 	public static PrintWriter pw;
 	private String status;
+	private String roomname;
 	
 	@Override
     public void paintComponent(Graphics g) {
@@ -145,7 +148,14 @@ class loginPanel extends JPanel {
 	public loginPanel() {
 		//Dynamic background
 		Socket s = null;
-		Scanner scanner = new Scanner(System.in);
+		int screenWidth = 1280;
+		int buttonWidth = 500;
+		int labelWidth = 400;
+		int textWidth = 500;
+		int textStartY = 100;
+		int textSplitY = 70;
+		int labelX = 200;
+		int buttonHeight = 50;
 		
 		svrIP = "localhost"; //Hard-coded so far
 		svrPort = 6789;
@@ -164,75 +174,75 @@ class loginPanel extends JPanel {
 			System.exit(1);
 		}
 		
-		image = Toolkit.getDefaultToolkit().createImage("background.gif");
+		image = Toolkit.getDefaultToolkit().createImage("clouds.gif");
 
 		  
 		//Place component
 		setLayout(null);
-		Font label_f = new Font("Dialog", Font.BOLD, 24);
-		Font text_f = new Font("Dialog", Font.PLAIN, 20);
+		Font label_f = new Font("ARCADECLASSIC", Font.BOLD, 44);
+		Font text_f = new Font("ARCADECLASSIC", Font.PLAIN, 40);
 		
-		Label userl = new Label(100,20,200,25, "Users: ", label_f, this);
+		Label userl = new Label(labelX,textStartY,labelWidth,25, "Users ", label_f, this);
 		add(userl);
 		
-		Label passwordl = new Label(100,50,200,25, "Password: ", label_f, this);
+		Label passwordl = new Label(labelX,textStartY + textSplitY * 1,labelWidth,25, "Password ", label_f, this);
 		add(passwordl);
 		
-		Label gamenamel = new Label(100, 80, 200, 25, "Gamename: ", label_f, this);
+		Label gamenamel = new Label(labelX, textStartY + textSplitY * 2, labelWidth, 25, "Gamename ", label_f, this);
 		add(gamenamel);
 		
-		Label errormsgl = new Label(100, 130, 500, 25, "", label_f, this);
+		Label errormsgl = new Label(100, textStartY + textSplitY * 3, 1500, 25, "", label_f, this);
 		errormsgl.setForeground(Color.RED);
 		add(errormsgl);
 		
 		JTextField userText = new JTextField();
-		userText.setBounds(300,20,200,25);
+		userText.setBounds(600,textStartY,textWidth,40);
 		userText.setFont(text_f);
         add(userText);
         
         JPasswordField passwordText = new JPasswordField();
-        passwordText.setBounds(300,50,200,25);
+        passwordText.setBounds(600,textStartY + textSplitY * 1,textWidth,40);
         passwordText.setFont(text_f);
         add(passwordText);
         
         JTextField gamenameText = new JTextField();
-        gamenameText.setBounds(300,80,200,25);
+        gamenameText.setBounds(600,textStartY + textSplitY * 2,textWidth,40);
         gamenameText.setFont(text_f);
 		add(gamenameText);
 		
 		
-		Button loginButton = new Button(200, 200, 250, 25, "ReadyPlayerOne", label_f, this);
+		Button loginButton = new Button((screenWidth - buttonWidth) / 2, 400, buttonWidth, buttonHeight, "Ready Player One", label_f, this);
 		loginButton.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent event) {  
-                myUserID = loginValidate(event, userText, passwordText); 
+                myUserID = loginValidate(event, userText, passwordText, errormsgl); 
                 System.out.println(myUserID);
                 if (myUserID>0) {
                 	boolean isExisted = checkNameExist(gamenameText.getText());
                 	System.out.println(isExisted);
                 	if (isExisted) {
-                		errormsgl.setText("Create Game Error: This name has existed!");
+                		errormsgl.setText("Create Game Error  Game name has existed");
                 	}
                 	else {
-                		errormsgl.setText("Now waiting for another player...");
-                		repaint();
-                		invalidate();
-                		validate();
                     	System.out.println("Now waiting for another thread...");
                 		sendMessageToServer("createRoom " + gamenameText.getText() + " " + myUserID);
-                		
                     	status = receiveMessageFromServer();
-                    	System.out.println("Starting...");
-                    	launchGame("");
+                    	roomname = receiveMessageFromServer();
+                    	System.out.println("Starting" + roomname + "...");
+                    	errormsgl.setText("Starting" + roomname + "...  ENJOY!!");
+                    	launchGame(roomname + " A");
                 	}
+                }
+                else {
+                	
                 }
             }  
         });
 		add(loginButton);
 		
-		Button joinButton = new Button(200, 240, 250, 25, "ReadyPlayerTwo", label_f, this);
+		Button joinButton = new Button((screenWidth - buttonWidth) / 2, 500, buttonWidth, buttonHeight, "Ready Player Two", label_f, this);
 		joinButton.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent event) {  
-                myUserID = loginValidate(event, userText, passwordText);  
+                myUserID = loginValidate(event, userText, passwordText, errormsgl);  
                 if (myUserID > 0) {
                 	boolean checkOK = checkNameExist(gamenameText.getText());
                 	if (checkOK) {
@@ -240,26 +250,27 @@ class loginPanel extends JPanel {
                 		sendMessageToServer("joinRoom " + gamenameText.getText() + " " + myUserID);
                     	System.out.println("be about to start");
                     	status = receiveMessageFromServer();
-                    	System.out.println("Starting...");
-                    	launchGame("");
+                    	System.out.println("Starting" + roomname + "...");
+                    	errormsgl.setText("Starting" + roomname + "...  ENJOY!!");
+                    	launchGame(roomname + " B");
                 	}
                 	else {
-                		errormsgl.setText("Join Game Error: Game name doesn't exist!");
+                		errormsgl.setText("Join Game Error   Game not existed");
                 	}
                 }
             }  
         });
 		add(joinButton);
 		
-		Button signupButton = new Button(200, 280, 250, 25, "Sign up", label_f, this);
+		Button signupButton = new Button((screenWidth - buttonWidth) / 2, 600, buttonWidth, buttonHeight, "Sign up", label_f, this);
 		signupButton.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent event) {  
-                signupValidate(event, userText, passwordText);  
+                signupValidate(event, userText, passwordText, errormsgl);  
             }  
         });
 		add(signupButton);
 		
-		Button guestButton = new Button(200, 320, 250, 25, "I'm a guest", label_f, this);
+		Button guestButton = new Button((screenWidth - buttonWidth) / 2, 700, buttonWidth, buttonHeight, "Guest Mode", label_f, this);
 		guestButton.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent event) {  
         		guestMode(event);  
@@ -267,10 +278,11 @@ class loginPanel extends JPanel {
         });
 		add(guestButton);
 		
+		
 	}
 	
 	public static void guestMode(MouseEvent event) {
-    	launchGame("");
+    	launchGame("Guest");
     }
 	
 	public static boolean checkUsernameValid(String username) {
@@ -283,7 +295,7 @@ class loginPanel extends JPanel {
 		return password.matches("[a-zA-Z0-9]+");
 	}
 	
-	public static void signupValidate(MouseEvent event, JTextField userText, JPasswordField password) {
+	public static String signupValidate(MouseEvent event, JTextField userText, JPasswordField password, JLabel errmsg) {
 		String password_str = new String(password.getPassword());
     	String username = userText.getText();
     	Connection conn = null;
@@ -291,15 +303,19 @@ class loginPanel extends JPanel {
 		PreparedStatement ps2 = null;
 		ResultSet rs = null;
     	
+		errmsg.setText("");
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); //acquire at run-time
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/CS201Proj?user=root&password=root&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://" + svrIP + "/CS201Proj?user=root&password=root&useSSL=false");
 			if (!checkUsernameValid(username)) {
-				JOptionPane.showMessageDialog(null, "Username should be 2-8 letters!", "Signup Error", JOptionPane.ERROR_MESSAGE);
+				errmsg.setText("Signup Error   Username should be 2 to 8 letters");
+				return "usernameerr";
 			}
 			else if (!checkPasswordValid(password_str)) {
-				JOptionPane.showMessageDialog(null, "Password should be 6-20 letters!", "Signup Error", JOptionPane.ERROR_MESSAGE);
+				errmsg.setText("Signup Error   Password should be 6 to 20 letters");
 				password.setText("");
+				return "passworderr";
 			}
 			else {
 				ps = conn.prepareStatement(" SELECT * " + 
@@ -308,7 +324,7 @@ class loginPanel extends JPanel {
 						 ";");
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					JOptionPane.showMessageDialog(null, "Username Taken!", "Signup Error", JOptionPane.ERROR_MESSAGE);
+					errmsg.setText("Username Taken!");
 					password.setText("");
 				}
 				else {
@@ -316,7 +332,7 @@ class loginPanel extends JPanel {
 							 " ('" + username + "', '" + password_str + "'" + ") ;");
 					ps2.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Sign up successfully!", "OK", JOptionPane.INFORMATION_MESSAGE);
-					
+					return "success";
 				}
 			}
 		} catch (SQLException sqle) {
@@ -339,10 +355,11 @@ class loginPanel extends JPanel {
 				System.out.println("sqle closing streams: " + sqle.getMessage());
 			}
 		}
+		return "";
 	}
 	
 	@SuppressWarnings("finally")
-	public static int loginValidate(MouseEvent event, JTextField userText, JPasswordField password) {
+	public static int loginValidate(MouseEvent event, JTextField userText, JPasswordField password, JLabel errmsg) {
     	String password_str = new String(password.getPassword());
     	String truepassword;
     	String username = userText.getText();
@@ -350,10 +367,12 @@ class loginPanel extends JPanel {
 		boolean authenticate = false;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		errmsg.setText("");
 		int myUserID = -1;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); //acquire at run-time
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/CS201Proj?user=root&password=root&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://" + svrIP + "/CS201Proj?user=root&password=root&useSSL=false");
 			if (!checkUsernameValid(username)) {
 				authenticate = false;
 			}
@@ -375,7 +394,8 @@ class loginPanel extends JPanel {
 			}
 			if (!authenticate) {
 	    		password.setText("");
-	    		JOptionPane.showMessageDialog(null, "Login Failed!", "Login Error", JOptionPane.ERROR_MESSAGE);
+	    		errmsg.setText("Login Failed!");
+	    		return -1;
 	    	}
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
@@ -403,8 +423,8 @@ class loginPanel extends JPanel {
 	
 	public static void launchGame(String param) {
 		try {
-			Process p = Runtime.getRuntime().exec("explorer deploy_win\\Game.lnk " + param);
-			//System.exit(0);
+			Process p = Runtime.getRuntime().exec("deploy_win\\Game.exe ");
+			System.exit(0);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} 

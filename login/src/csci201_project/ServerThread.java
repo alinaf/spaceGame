@@ -58,6 +58,7 @@ public class ServerThread extends Thread {
     	Connection conn = null;
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver"); //acquire at run-time
@@ -72,9 +73,13 @@ public class ServerThread extends Thread {
 					JOptionPane.showMessageDialog(null, "Got existed room!", "CreateARoom Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					ps2 = conn.prepareStatement(" INSERT INTO Game(userAID, pointA, userBID, pointB, gameName) VALUES" + 
-							 " (" + gameroom.userA + ", 0, " + gameroom.userB + ", 0, '" + gameroom.roomName + "') ;");
+					ps2 = conn.prepareStatement(" INSERT INTO Game(userID, points, livesnum, gameName) VALUES" + 
+							 " (" + gameroom.userA + ", 0, 3, '" + gameroom.roomName + "') ;");
 					ps2.executeUpdate();
+					
+					ps3 = conn.prepareStatement(" INSERT INTO Game(userID, points, livesnum, gameName) VALUES" + 
+							 " (" + gameroom.userB + ", 0, 3, '" + gameroom.roomName + "') ;");
+					ps3.executeUpdate();
 				}
 			}
 		} catch (SQLException sqle) {
@@ -90,6 +95,7 @@ public class ServerThread extends Thread {
 					ps.close();
 				}
 				if (ps2 != null) ps2.close();
+				if (ps3 != null) ps3.close();
 				if (conn != null) {
 					conn.close();
 				}
@@ -130,6 +136,8 @@ public class ServerThread extends Thread {
 					oppoClientID = room.clientA;
 					server.sendMessage("ready", room.clientA);
 					sendMessageToClient("ready");
+					server.sendMessage(room.roomName, room.clientA);
+					sendMessageToClient(room.roomName);
 					
 					addDatabase(room);
 					ServerThread oppoServer = server.findServer(room.clientA);
