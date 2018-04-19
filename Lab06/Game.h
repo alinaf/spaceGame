@@ -21,6 +21,10 @@
 #include "MoonBounce.h"
 #include "DoubleCoin.h"
 
+#include "mysql.h"
+#pragma comment(lib, "libmysql")
+#pragma comment(lib, "mysqlclient")
+
 class Actor;
 
 
@@ -54,6 +58,8 @@ public:
 	int mp_friendUserID;
 	std::string mp_gameName;
 	std::string mp_svrIP;
+
+	MYSQL *connection, mysql;
     
 private:
     SDL_Window* window;

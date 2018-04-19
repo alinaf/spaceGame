@@ -24,8 +24,8 @@ int main(int argc, char** argv)
 	}*/
 	game.mp_isGuest = 0;
 	game.mp_gameName = "test222";
-	game.mp_yourUserID = 2;
-	game.mp_friendUserID = 1;
+	game.mp_yourUserID = 1;
+	game.mp_friendUserID = 2;
 	game.mp_svrIP = "192.168.43.67";
     if (game.Initialize()){
         game.RunLoop();
