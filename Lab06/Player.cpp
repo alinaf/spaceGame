@@ -61,6 +61,7 @@ void Player::UpdateActor(float deltaTime){
     if (doubleCoin){
         doubleCoinTimer += deltaTime;
         if (doubleCoinTimer > 5.0f){
+            Mix_PlayChannel(-1, GetGame()->GetSound("Assets/Sounds/PowerDown.wav"), 0);
             doubleCoin = false;
             doubleCoinTimer = 0.0f;
         }

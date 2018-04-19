@@ -20,6 +20,7 @@ DoubleCoin::DoubleCoin(class Game* game):Actor(game){
 
 void DoubleCoin::UpdateActor(float deltaTime){
     if (this->GetCollision()->Intersect(this->GetGame()->GetPlayer()->GetCollision())){
+        Mix_PlayChannel(-1, GetGame()->GetSound("Assets/Sounds/Coin_up.wav"), 0);
         GetGame()->GetPlayer()->SetDoubleCoin(true);
         this->SetState(Actor::EDead);
     }
