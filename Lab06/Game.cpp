@@ -399,6 +399,12 @@ void Game::GenerateOutput(){
     TTF_Font* font = TTF_OpenFont("ARCADECLASSIC.TTF", 24);
     SDL_Color White = {255, 255, 255};
     
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    
+    SDL_Surface* lives = TTF_RenderText_Solid(font, ("x" + std::to_string(((PlayerMove*) mPlayer->GetMovement())->GetLives())).c_str(), White);
+    SDL_Texture* livesMessage = SDL_CreateTextureFromSurface(renderer, lives);
+    
     if (((PlayerMove*) mPlayer->GetMovement())->GetLives() == 0){
         SDL_Rect gameover_rect;
         gameover_rect.x = 0;
@@ -406,34 +412,51 @@ void Game::GenerateOutput(){
         gameover_rect.w = 1024;
         gameover_rect.h = 768;
         SDL_RenderCopy(renderer, GetTexture("Assets/gameover.png"), NULL, &gameover_rect);
+        
+        
+        SDL_Rect Message_rect;
+        int digits = 0;
+        int temp = score;
+        while (temp) {
+            temp /= 10;
+            digits++;
+        }
+        if (score == 0){
+            digits = 1;
+        }
+        Message_rect.w = digits * 50;
+        Message_rect.h = 100;
+        Message_rect.x = 1024/2 - Message_rect.w/2;
+        Message_rect.y = 550;
+        SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
     }
     
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, std::to_string(score).c_str(), White);
-    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-    SDL_Rect Message_rect;
-    Message_rect.x = 20;
-    Message_rect.y = 0;
-    int digits = 0;
-    int temp = score;
-    while (temp) {
-        temp /= 10;
-        digits++;
+    else{
+        SDL_Rect Message_rect;
+        Message_rect.x = 20;
+        Message_rect.y = 0;
+        int digits = 0;
+        int temp = score;
+        while (temp) {
+            temp /= 10;
+            digits++;
+        }
+        if (score == 0){
+            digits = 1;
+        }
+        Message_rect.w = digits * 25;
+        Message_rect.h = 50;
+        SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+        
+        SDL_Rect lives_rect;
+        lives_rect.x = 1024-70;
+        lives_rect.y = 0;
+        lives_rect.w = 50;
+        lives_rect.h = 50;
+        SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
     }
-    if (score == 0){
-        digits = 1;
-    }
-    Message_rect.w = digits * 25;
-    Message_rect.h = 50;
-    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
     
-    SDL_Surface* lives = TTF_RenderText_Solid(font, ("x" + std::to_string(((PlayerMove*) mPlayer->GetMovement())->GetLives())).c_str(), White);
-    SDL_Texture* livesMessage = SDL_CreateTextureFromSurface(renderer, lives);
-    SDL_Rect lives_rect;
-    lives_rect.x = 1024-70;
-    lives_rect.y = 0;
-    lives_rect.w = 50;
-    lives_rect.h = 50;
-    SDL_RenderCopy(renderer, livesMessage, NULL, &lives_rect);
+    
     
     SDL_RenderPresent(renderer);
     
